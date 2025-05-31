@@ -35,13 +35,13 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    .header-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: relative;
-      overflow: hidden;
-      border-radius: 0 0 20px 20px;
+    header img {
+  width: 100%;
+  height: auto;
+  max-height: 50vh; /* Limits height to 50% of viewport */
+  object-fit: cover;
+  display: block;
+  border-radius: 0 0 20px 20px;
     }
 
     .header-overlay {
@@ -414,10 +414,10 @@
     <button><i class="fas fa-users"></i> Management Team</button>
     <button><i class="fas fa-info-circle"></i> Developer</button>
   </nav>
-  </header>
+  
 
    
-  <div class="header-image"><img src="20250601_033118.jpg" alt="Reunion Banner"> </div>
+  <div class="header-image"><img src="20250601_033118.jpg" alt="Reunion Banner"> </div></header>
     <div class="header-text">
       <h1>REUNION OF ALIM 2024</h1>
       <p>Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
@@ -556,7 +556,7 @@
             const size = Math.min(userImg.width, userImg.height);
             const sx = (userImg.width - size) / 2;
             const sy = (userImg.height - size) / 2;
-            ctx.drawImage(userImg, sx, sy, size, size, 1890, 1130, 500, 500);
+            ctx.drawImage(userImg, sx, sy, size, size, 1890, 1120, 500, 500);
 
             // Convert canvas to blob and download
             canvas.toBlob(blob => {
