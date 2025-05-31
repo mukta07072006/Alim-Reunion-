@@ -110,12 +110,12 @@
   font-size: 1.1rem;
 }
 
-    .navbar button:hover {
+    .navbar a:hover {
       color: var(--accent);
       transform: translateY(-2px);
     }
 
-    .navbar button::after {
+    .navbar a::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -127,7 +127,7 @@
       transition: width 0.3s ease;
     }
 
-    .navbar button:hover::after {
+    .navbar a:hover::after {
       width: 70%;
     }
 
@@ -382,7 +382,7 @@
         flex-wrap: wrap;
       }
 
-      .navbar button {
+      .navbar a {
         padding: 0.6rem 1rem;
         margin: 0.3rem;
         font-size: 0.9rem;
