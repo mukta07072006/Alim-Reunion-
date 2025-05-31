@@ -68,16 +68,24 @@
       font-size: 1.1rem;
     }
 
-    .navbar {
-      display: flex;
-      justify-content: center;
-      background-color: var(--primary-dark);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-dark);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.navbar a {
+  /* Keep all your existing styles */
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
 
     .navbar button {
       background-color: transparent;
