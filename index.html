@@ -13,6 +13,26 @@
       color: #333;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      background-color: #004d26;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     header img {
       width: 100%;
       height: auto;
@@ -58,8 +78,18 @@
       margin-top: 20px;
     }
 
+    .about-section {
+      background-color: #006400;
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
     footer {
-      background: #222;
+      background: #888;
       color: #fff;
       padding: 20px;
       margin-top: 40px;
@@ -89,10 +119,28 @@
 </head>
 <body>
 
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Album</a>
+    <a href="#">Management</a>
+    <a href="#">Team</a>
+    <a href="#">Developer</a>
+  </nav>
+
   <!-- Header Banner -->
   <header>
     <img src="20250601_033118.jpg" alt="Reunion Banner">
   </header>
+
+  <h1 class="text-4xl font-bold text-green-700">REUNION OF ALIM 2024</h1>
+  <p class="text-sm text-gray-600" style="text-align:center;">Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <h2 class="text-2xl font-semibold mb-2">About the Reunion</h2>
+    <p class="mb-4">Join us on <strong>21st June 2024</strong> to celebrate our unforgettable journey together. This event will bring together over 700 students from our beloved batch. Let's reconnect, relive, and rejoice!</p>
+  </section>
 
   <!-- Upload Form -->
   <div class="container">
@@ -105,19 +153,8 @@
     <canvas id="canvas" width="3000" height="1993"></canvas>
   </div>
 
-  <!-- Footer with Gallery -->
-  <footer>
-    <div class="footer-content">
-      <h3>Reunion Memories Gallery</h3>
-      <p>Snapshots of friendship and brotherhood</p>
-      <div class="gallery">
-        <img src="https://via.placeholder.com/100" alt="memory 1">
-        <img src="https://via.placeholder.com/100" alt="memory 2">
-        <img src="https://via.placeholder.com/100" alt="memory 3">
-        <img src="https://via.placeholder.com/100" alt="memory 4">
-        <img src="https://via.placeholder.com/100" alt="memory 5">
-      </div>
-    </div>
+  <footer class="p-4 text-center text-sm">
+    Made for JASKM Alim 2024 | Designed by Moshud Muktadir Al Hasnain 
   </footer>
 
   <script>
@@ -151,7 +188,7 @@
             const sx = (userImg.width - size) / 2;
             const sy = (userImg.height - size) / 2;
 
-            // Draw into box: x = 1870, y = 860, size = 400x400
+            // Draw into box: x = 1890, y = 1130, size = 500x500
             ctx.drawImage(userImg, sx, sy, size, size, 1890, 1130, 500, 500);
 
             // Auto download
