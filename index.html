@@ -79,7 +79,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    .navbar a {
+    .navbar button {
       background-color: transparent;
       border: none;
       color: var(--text-light);
@@ -110,12 +110,12 @@
   font-size: 1.1rem;
 }
 
-    .navbar a:hover {
+    .navbar button:hover {
       color: var(--accent);
       transform: translateY(-2px);
     }
 
-    .navbar a::after {
+    .navbar button::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -127,7 +127,7 @@
       transition: width 0.3s ease;
     }
 
-    .navbar a:hover::after {
+    .navbar button:hover::after {
       width: 70%;
     }
 
@@ -382,7 +382,7 @@
         flex-wrap: wrap;
       }
 
-      .navbar a {
+      .navbar button {
         padding: 0.6rem 1rem;
         margin: 0.3rem;
         font-size: 0.9rem;
@@ -409,10 +409,10 @@
   <!-- Navigation -->
   <header>
   <nav class="navbar">
-    <a href="#"><i class="fas fa-home"></i> Home</a>
-    <a href="#"><i class="fas fa-images"></i> Album</a>
-    <a href="#"><i class="fas fa-users"></i> Management Team</a>
-    <a href="https://www.facebook.com/share/1HmaH5gFJW/"><i class="fas fa-info-circle"></i> Developer</a>
+    <button href="#"><i class="fas fa-home"></i> Home</button>
+    <button href="#"><i class="fas fa-images"></i> Album</button>
+    <button href="#"><i class="fas fa-users"></i> Management Team</button>
+    <button href="https://www.facebook.com/share/1HmaH5gFJW/"><i class="fas fa-info-circle"></i> Developer</button>
   </nav>
   
 
