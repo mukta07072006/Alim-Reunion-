@@ -5,32 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jamea Ahmadia Reunion 2025</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       background: #f0f2f5;
       color: #333;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px;
-      background-color: #004d26;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
     }
 
     header img {
@@ -39,12 +23,36 @@
       display: block;
     }
 
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #006400;
+      padding: 10px;
+    }
+
+    .navbar button {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 10px 16px;
+      margin: 5px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .navbar button:hover {
+      background-color: white;
+      color: #006400;
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 30px 20px;
       background: #fff;
-      margin-top: -5px;
     }
 
     h1 {
@@ -78,21 +86,12 @@
       margin-top: 20px;
     }
 
-    .about-section {
-      background-color: #006400;
-      color: white;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 800px;
-      margin: 30px auto;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
     footer {
       background: #888;
       color: #fff;
       padding: 20px;
       margin-top: 40px;
+      text-align: center;
     }
 
     .gallery {
@@ -109,37 +108,64 @@
       border-radius: 6px;
     }
 
-    .footer-content {
+    /* ✅ About section custom style */
+    .about-section {
+      background-color: #064d2c;
+      color: #fff;
+      border-radius: 20px;
+      padding: 30px 20px;
+      margin: 30px auto;
       max-width: 800px;
-      margin: auto;
-      text-align: center;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
     }
 
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        padding: 20px 15px;
+      }
+
+      input, button {
+        font-size: 15px;
+      }
+
+      .about-section {
+        padding: 20px 15px;
+        margin: 20px 10px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Navigation Bar -->
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Album</a>
-    <a href="#">Management</a>
-    <a href="#">Team</a>
-    <a href="#">Developer</a>
-  </nav>
 
   <!-- Header Banner -->
   <header>
     <img src="20250601_033118.jpg" alt="Reunion Banner">
   </header>
 
-  <h1 class="text-4xl font-bold text-green-700">REUNION OF ALIM 2024</h1>
-  <p class="text-sm text-gray-600" style="text-align:center;">Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
+  <!-- ✅ Top Navigation Buttons -->
+  <nav class="navbar">
+    <button>Home</button>
+    <button>Album</button>
+    <button>Management Team</button>
+    <button>Developer</button>
+  </nav>
 
-  <!-- About Section -->
+  <!-- Title -->
+  <h1 class="text-4xl font-bold text-green-700">REUNION OF ALIM 2024</h1>
+  <p class="text-sm text-gray-600" style="text-align: center; margin-bottom: 10px;">
+    Jamea Ahmadia Sunnia Alia Kamil Madrasah
+  </p>
+
+  <!-- ✅ About Section -->
   <section class="about-section">
     <h2 class="text-2xl font-semibold mb-2">About the Reunion</h2>
-    <p class="mb-4">Join us on <strong>21st June 2024</strong> to celebrate our unforgettable journey together. This event will bring together over 700 students from our beloved batch. Let's reconnect, relive, and rejoice!</p>
+    <p>Join us on <strong>21st June 2024</strong> to celebrate our unforgettable journey together. This event will bring together over 700 students from our beloved batch. Let's reconnect, relive, and rejoice!</p>
   </section>
 
   <!-- Upload Form -->
@@ -153,8 +179,9 @@
     <canvas id="canvas" width="3000" height="1993"></canvas>
   </div>
 
-  <footer class="p-4 text-center text-sm">
-    Made for JASKM Alim 2024 | Designed by Moshud Muktadir Al Hasnain 
+  <!-- ✅ Footer with gray color -->
+  <footer>
+    Made for JASKM Alim 2024 | Designed by Moshud Muktadir Al Hasnain
   </footer>
 
   <script>
@@ -183,15 +210,11 @@
           userImg.src = e.target.result;
 
           userImg.onload = () => {
-            // Crop to square
             const size = Math.min(userImg.width, userImg.height);
             const sx = (userImg.width - size) / 2;
             const sy = (userImg.height - size) / 2;
-
-            // Draw into box: x = 1890, y = 1130, size = 500x500
             ctx.drawImage(userImg, sx, sy, size, size, 1890, 1130, 500, 500);
 
-            // Auto download
             canvas.toBlob(blob => {
               const link = document.createElement("a");
               link.href = URL.createObjectURL(blob);
