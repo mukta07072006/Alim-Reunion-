@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reunion Alim 2024</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    #cardCanvas {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Hero Section -->
+  <header class="bg-white shadow p-6 text-center">
+    <h1 class="text-4xl font-bold text-green-700">REUNION ALIM 2024</h1>
+    <p class="text-sm text-gray-600">Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
+  </header>  <!-- About Section -->  <section class="p-6 max-w-3xl mx-auto">
+    <h2 class="text-2xl font-semibold mb-2">About the Reunion</h2>
+    <p class="mb-4">Join us on <strong>30th June 2024</strong> to celebrate our unforgettable journey together. This event will bring together over 700 students from our beloved batch. Let's reconnect, relive, and rejoice!</p>
+  </section>  <!-- Card Generator Section -->  <section class="p-6 max-w-3xl mx-auto bg-white rounded-xl shadow-md">
+    <h2 class="text-xl font-bold mb-4">Generate Your Reunion Card</h2>
+    <div class="space-y-4">
+      <input type="text" id="nameInput" placeholder="Enter your name" class="w-full p-2 border rounded">
+      <input type="file" id="photoInput" accept="image/*" class="w-full">
+      <button id="generateBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Generate & Download</button>
+      <p id="doneMsg" class="hidden text-green-700 font-medium">✅ Your card has been generated and downloaded. You cannot upload again.</p>
+    </div>
+    <canvas id="cardCanvas" width="1156" height="768"></canvas>
+  </section>  <!-- Gallery Placeholder -->  <section class="p-6 max-w-3xl mx-auto">
+    <h2 class="text-xl font-semibold mb-2">Gallery</h2>
+    <p>Photos from the event will be available here.</p>
+  </section>  <!-- Footer -->  <footer class="p-4 bg-white text-center text-sm text-gray-500">
+    Made for Jamea Ahmadia | Designed by YourName
+  </footer>  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const nameInput = document.getElementById('nameInput');
+    const photoInput = document.getElementById('photoInput');
+    const cardCanvas = document.getElementById('cardCanvas');
+    const ctx = cardCanvas.getContext('2d');
+    const doneMsg = document.getElementById('doneMsg');
+
+    let hasGenerated = false;
+
+    generateBtn.addEventListener('click', () => {
+      if (hasGenerated) return;
+
+      const name = nameInput.value.trim();
+      const file = photoInput.files[0];
+
+      if (!name || !file) {
+        alert('Please provide both name and photo.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        const uploadedPhoto = new Image();
+        img.src = './file-BHcvo52vgs7SLtyH4drGNw'; // Replace with final banner path if needed
+        uploadedPhoto.src = event.target.result;
+
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0);
+
+          uploadedPhoto.onload = () => {
+            // Draw square photo inside the box area
+            ctx.drawImage(uploadedPhoto, 650, 325, 120, 120);
+
+            // Draw name
+            ctx.font = 'bold 24px Arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText(name, 640, 475);
+
+            // Create download link
+            const link = document.createElement('a');
+            link.download = `reunion_card_${name}.png`;
+            link.href = cardCanvas.toDataURL();
+            link.click();
+
+            hasGenerated = true;
+            generateBtn.disabled = true;
+            generateBtn.classList.add('opacity-50');
+            doneMsg.classList.remove('hidden');
+          };
+        };
+      };
+      reader.readAsDataURL(file);
+    });
+  </script></body>
+</html>
