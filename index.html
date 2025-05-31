@@ -1,111 +1,171 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reunion ALIM 2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jamea Ahmadia Reunion 2025</title>
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      text-align: center;
+      padding: 0;
+      background: #f0f2f5;
+      color: #333;
     }
+
     header img {
       width: 100%;
-      max-height: 300px;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
-    main {
-      padding: 20px;
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      background: #fff;
+      margin-top: -5px;
     }
-    .form-group {
-      margin: 15px 0;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
     }
-    input[type="text"], input[type="tel"] {
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
-      margin: 5px 0;
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      font-size: 16px;
     }
-    input[type="file"] {
-      margin-top: 10px;
-    }
+
     button {
-      padding: 10px 20px;
-      background: #28a745;
+      background-color: #007bff;
       color: white;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
     }
-    #resultCanvas {
-      margin-top: 20px;
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    canvas {
       display: none;
-      border: 1px solid #ccc;
+      margin-top: 20px;
     }
+
+    footer {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- Header Banner -->
   <header>
-    <img src="20250601_033118.jpg" alt="Banner" />
+    <img src="20250601_033118.jpg" alt="Reunion Banner">
   </header>
-  <main>
-    <h1>Reunion ALIM 2024 - Photo Upload</h1>
-    <div class="form-group">
-      <input type="text" id="name" placeholder="Enter Your Name" required /><br />
-      <input type="tel" id="phone" placeholder="Enter Your Phone Number" required /><br />
-      <input type="file" id="photoUpload" accept="image/*" required /><br />
-      <button onclick="handleUpload()">Upload & Download</button>
+
+  <!-- Upload Form -->
+  <div class="container">
+    <h1>Upload Your Participation Card</h1>
+    <input type="text" id="name" placeholder="Enter your full name">
+    <input type="tel" id="phone" placeholder="Enter your phone number">
+    <input type="file" id="photo" accept="image/*">
+    <button onclick="generateCard()">Generate & Download</button>
+
+    <canvas id="canvas" width="3000" height="1993"></canvas>
+  </div>
+
+  <!-- Footer with Gallery -->
+  <footer>
+    <div class="footer-content">
+      <h3>Reunion Memories Gallery</h3>
+      <p>Snapshots of friendship and brotherhood</p>
+      <div class="gallery">
+        <img src="https://via.placeholder.com/100" alt="memory 1">
+        <img src="https://via.placeholder.com/100" alt="memory 2">
+        <img src="https://via.placeholder.com/100" alt="memory 3">
+        <img src="https://via.placeholder.com/100" alt="memory 4">
+        <img src="https://via.placeholder.com/100" alt="memory 5">
+      </div>
     </div>
-    <canvas id="resultCanvas" width="1156" height="768"></canvas>
-  </main>  <script>
-    let hasSubmitted = false;
+  </footer>
 
-    function handleUpload() {
-      if (hasSubmitted) {
-        alert("You can only upload and download once.");
-        return;
-      }
-
+  <script>
+    function generateCard() {
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
-      const file = document.getElementById("photoUpload").files[0];
+      const photoInput = document.getElementById("photo");
 
-      if (!name || !phone || !file) {
-        alert("Please fill out all fields and choose an image.");
+      if (!name || !phone || !photoInput.files[0]) {
+        alert("Please fill in all fields and select a photo.");
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const userImg = new Image();
-        userImg.src = event.target.result;
-        userImg.onload = function () {
-          const canvas = document.getElementById("resultCanvas");
-          const ctx = canvas.getContext("2d");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
 
-          const bg = new Image();
-          bg.src = "template.jpg";
-          bg.onload = function () {
-            ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-            const squareSize = 150;
-            const squareX = 875;
-            const squareY = 360;
-            ctx.drawImage(userImg, squareX, squareY, squareSize, squareSize);
+      const template = new Image();
+      template.src = "template.jpg";
+      template.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
 
-            canvas.style.display = "block";
-            const downloadLink = document.createElement("a");
-            downloadLink.download = `${name}_${phone}_card.png`;
-            downloadLink.href = canvas.toDataURL();
-            downloadLink.click();
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const userImg = new Image();
+          userImg.src = e.target.result;
 
-            hasSubmitted = true;
+          userImg.onload = () => {
+            // Crop to square
+            const size = Math.min(userImg.width, userImg.height);
+            const sx = (userImg.width - size) / 2;
+            const sy = (userImg.height - size) / 2;
+
+            // Draw into box: x = 1870, y = 860, size = 400x400
+            ctx.drawImage(userImg, sx, sy, size, size, 1870, 860, 400, 400);
+
+            // Auto download
+            canvas.toBlob(blob => {
+              const link = document.createElement("a");
+              link.href = URL.createObjectURL(blob);
+              link.download = `${name.replace(/\s+/g, "_")}_card.jpg`;
+              link.click();
+            }, "image/jpeg");
           };
         };
+        reader.readAsDataURL(photoInput.files[0]);
       };
-      reader.readAsDataURL(file);
     }
-  </script></body>
+  </script>
+</body>
 </html>
