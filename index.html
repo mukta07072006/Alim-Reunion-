@@ -564,7 +564,7 @@
       }
     });
 
-    // Generate participation card
+    // Generate participation card with rounded corners
     function generateCard() {
       const photoInput = document.getElementById('photo');
       const canvas = document.getElementById('canvas');
@@ -592,30 +592,38 @@
           const userImg = new Image();
           userImg.src = e.target.result;
 
-          userImg.onload = () => 
-
-// Create clipping path for rounded corners
-ctx.beginPath();
-const radius = 30; // Adjust corner radius (pixels)
-const x = 1890;    // Your photo's X position
-const y = 1120;    // Your photo's Y position
-const width = 500; // Your photo's width
-const height = 500;// Your photo's height
-
-// Draw rounded rectangle path
-ctx.moveTo(x + radius, y);
-ctx.arcTo(x + width, y, x + width, y + height, radius);
-ctx.arcTo(x + width, y + height, x, y + height, radius);
-ctx.arcTo(x, y + height, x, y, radius);
-ctx.arcTo(x, y, x + width, y, radius);
-ctx.closePath();
-ctx.clip(); // Apply clipping region
-
-// Draw user image (now with rounded corners)
-ctx.drawImage(userImg, sx, sy, size, size, x, y, width, height);
-
-// Reset clipping for other elements
-ctx.restore(); 
+          userImg.onload = () => {
+            const size = Math.min(userImg.width, userImg.height);
+            const sx = (userImg.width - size) / 2;
+            const sy = (userImg.height - size) / 2;
+            
+            // Rounded corners implementation
+            const radius = 30;
+            const x = 1890, y = 1120, width = 500, height = 500;
+            
+            ctx.save();
+            
+            // Create clipping path
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.arcTo(x + width, y, x + width, y + height, radius);
+            ctx.arcTo(x + width, y + height, x, y + height, radius);
+            ctx.arcTo(x, y + height, x, y, radius);
+            ctx.arcTo(x, y, x + width, y, radius);
+            ctx.closePath();
+            ctx.clip();
+            
+            // Draw user image
+            ctx.drawImage(userImg, sx, sy, size, size, x, y, width, height);
+            
+            // Optional: Add white border
+            ctx.beginPath();
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = 'gray';
+            ctx.roundRect(x, y, width, height, radius);
+            ctx.stroke();
+            
+            ctx.restore();
 
             // Convert canvas to blob and download
             canvas.toBlob(blob => {
