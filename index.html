@@ -223,7 +223,18 @@
       font-weight: 500;
       color: var(--text-light);
     }
-
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--primary-light);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
     .radio-group {
       display: flex;
       gap: 1.5rem;
@@ -291,6 +302,7 @@
 
     .upload-area p {
       color: var(--text-muted);
+      margin: 0;
     }
 
     #photo {
