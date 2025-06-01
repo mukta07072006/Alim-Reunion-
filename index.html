@@ -442,6 +442,87 @@
       font-size: 0.9rem;
     }
 
+    .meet-dev {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  text-align: center;
+  padding: 2.5rem;
+  margin: 3rem auto;
+  max-width: 800px;
+}
+
+.dev-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.dev-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.dev-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev-details h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  background: linear-gradient(to right, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dev-details p {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.dev-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dev-social a {
+  color: var(--text-light);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.dev-social a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.dev-bio {
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dev-profile {
+    flex-direction: column;
+  }
+  
+  .dev-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
     /* Animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -577,6 +658,35 @@
     <canvas id="canvas" width="3000" height="1993"></canvas>
   </div>
 
+  <!-- Add this section where you want it to appear (before footer works well) -->
+<section class="meet-dev about-section fade-in">
+  <div class="dev-container">
+    <h2>Meet the Developer</h2>
+    
+    <div class="dev-profile">
+      <!-- Replace with your photo -->
+      <div class="dev-photo">
+        <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain">
+      </div>
+      
+      <div class="dev-details">
+        <h3>Moshud Muktadir Al Hasnain</h3>
+        <p>Islamic Studies (CU)</p>
+        
+        <div class="dev-social">
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#" target="_blank"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <p class="dev-bio">
+      Proud alumnus who built this platform to reconnect our batch. 
+      Passionate about using technology to bring people together.
+    </p>
+  </div>
+</section>
   <!-- Footer -->
   <footer>
     <div class="footer-content">
