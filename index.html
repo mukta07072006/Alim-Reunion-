@@ -286,7 +286,6 @@
       margin-bottom: 1.5rem;
       transition: all 0.3s ease;
       cursor: pointer;
-      display: none;
     }
 
     .upload-area:hover {
@@ -471,7 +470,7 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
     
-#uploadArea {
+#magazineUploadArea {
   position: relative;
   overflow: hidden;
 }
@@ -607,7 +606,7 @@
       </div>
     </div>
 
-    <div id="uploadArea" class="upload-area" onclick="document.getElementById('photo').click()">
+    <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photo').click()">
       <i class="fas fa-cloud-upload-alt"></i>
       <p>Click to upload your photo</p>
       <p class="text-muted">(JPEG or PNG, max 5MB)</p>
@@ -649,7 +648,7 @@
       
       <div class="form-group">
         <label>Profile Photo</label>
-        <div class="upload-area" id="uploadArea">
+        <div class="upload-area" id="magazineUploadArea">
           <i class="fas fa-camera"></i>
           <p>Click to upload your photo</p>
           <img id="imagePreview" style="display: none; max-width: 100%; max-height: 200px;">
@@ -705,7 +704,7 @@
   <script>
     // Toggle upload area based on registration status
     function toggleUploadArea(show) {
-      const uploadArea = document.getElementById('uploadArea');
+      const uploadArea = document.getElementById('participationUploadArea');
       const previewContainer = document.getElementById('previewContainer');
       const generateBtn = document.getElementById('generateBtn');
       
@@ -721,13 +720,19 @@
       }
     }
 
-    // Photo upload preview
+    // Photo upload preview for participation card
     document.getElementById('photo').addEventListener('change', function(e) {
       const previewContainer = document.getElementById('previewContainer');
       const previewImage = document.getElementById('previewImage');
       const generateBtn = document.getElementById('generateBtn');
       
       if (this.files && this.files[0]) {
+        // Check file size (5MB max)
+        if (this.files[0].size > 5 * 1024 * 1024) {
+          alert('File size too large (max 5MB)');
+          return;
+        }
+        
         const reader = new FileReader();
         
         reader.onload = function(e) {
@@ -843,69 +848,75 @@
     }
 
     // Formspree form handling
-    // Handle file upload click and preview
-const uploadArea = document.getElementById('uploadArea');
-const photoInput = document.getElementById('photoInput');
-const imagePreview = document.getElementById('imagePreview');
-
-uploadArea.addEventListener('click', () => {
-  photoInput.click();
-});
-
-photoInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      imagePreview.src = event.target.result;
-      imagePreview.style.display = 'block';
-      uploadArea.classList.add('has-image');
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-// Form submission handler
-document.getElementById('reunion-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(this);
-  
-  // Show loading state
-  const submitBtn = this.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Uploading...';
-  
-  fetch(this.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      alert('Thank you for registering!');
-      this.reset();
-      // Reset upload area
-      imagePreview.style.display = 'none';
-      uploadArea.classList.remove('has-image');
-    } else {
-      throw new Error('Form submission failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Submission failed. Please try again.');
-  })
-  .finally(() => {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Submit Registration';
-  });
-});
-
-    // Fade-in animation
     document.addEventListener('DOMContentLoaded', function() {
+      // Magazine form upload handling
+      const magazineUploadArea = document.getElementById('magazineUploadArea');
+      const photoInput = document.getElementById('photoInput');
+      const imagePreview = document.getElementById('imagePreview');
+
+      magazineUploadArea.addEventListener('click', () => {
+        photoInput.click();
+      });
+
+      photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          // Check file size (5MB max)
+          if (file.size > 5 * 1024 * 1024) {
+            alert('File size too large (max 5MB)');
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            imagePreview.src = event.target.result;
+            imagePreview.style.display = 'block';
+            magazineUploadArea.classList.add('has-image');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission handler
+      document.getElementById('reunion-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Uploading...';
+        
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('Thank you for registering!');
+            this.reset();
+            // Reset upload area
+            imagePreview.style.display = 'none';
+            magazineUploadArea.classList.remove('has-image');
+            photoInput.value = '';
+          } else {
+            throw new Error('Form submission failed');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Submission failed. Please try again.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Registration';
+        });
+      });
+
       // Initialize countdown
       setInterval(updateCountdown, 1000);
       updateCountdown();
@@ -925,11 +936,6 @@ document.getElementById('reunion-form').addEventListener('submit', function(e) {
         el.style.opacity = 0;
         el.style.transition = 'opacity 0.6s ease';
         observer.observe(el);
-      });
-
-      // File upload click handler
-      document.querySelector('.upload-area').addEventListener('click', function() {
-        this.querySelector('input[type="file"]').click();
       });
     });
   </script>
