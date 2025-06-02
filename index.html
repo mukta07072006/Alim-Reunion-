@@ -189,6 +189,78 @@
       gap: 15px;
       margin-top: 15px;
     }
+    /* Payment Section Styles */
+.payment-section {
+  background: var(--primary-dark);
+  color: var(--text-light);
+  padding: 1.5rem 0;
+  text-align: center;
+  border-bottom: 2px solid var(--accent);
+}
+
+.payment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  min-width: 250px;
+}
+
+.payment-icon {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.payment-details h4 {
+  margin-bottom: 0.25rem;
+  color: var(--text-light);
+}
+
+.payment-details p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.payment-details small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.payment-note {
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .payment-methods {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .payment-method {
+    min-width: auto;
+    justify-content: center;
+  }
+}
 
     .countdown-item {
       background: var(--primary-dark);
@@ -565,7 +637,31 @@
     <h2>About the Reunion</h2>
     <p>Join us on <strong>21st June 2025</strong> to celebrate our unforgettable journey together. This grand event will bring together students from our beloved institution. Let's reconnect, relive memories, and create new ones in this special gathering of our alumni community.</p>
   </section>
-
+<!-- Add this right after your header/banner section -->
+<section class="payment-section fade-in">
+  <div class="payment-container">
+    <h3>Registration Fee/Donation</h3>
+    <div class="payment-methods">
+      <div class="payment-method">
+        <i class="fas fa-mobile-alt payment-icon"></i>
+        <div class="payment-details">
+          <h4>bKash</h4>
+          <p>01972887181</p>
+          <small>Personal</small>
+        </div>
+      </div>
+      <div class="payment-method">
+        <i class="fas fa-wallet payment-icon"></i>
+        <div class="payment-details">
+          <h4>Nagad</h4>
+          <p>01813311034</p>
+          <small>Personal</small>
+        </div>
+      </div>
+    </div>
+    <p class="payment-note">Please send your payment and mention your name in the reference.</p>
+  </div>
+</section>
   <div class="countdown-container fade-in">
     <h3>Time Until Reunion</h3>
     <div class="countdown">
