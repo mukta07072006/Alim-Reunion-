@@ -224,8 +224,9 @@
       color: var(--text-light);
     }
 .form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="text"] {
+.form-group input[type="tel"],
+.form-group input[type="text"],
+    form-group input [type="text"] {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--primary-light);
@@ -644,6 +645,10 @@
       <div class="form-group">
         <label for="address">Address</label>
         <input type="text" id="address" name="address">
+      </div>
+      <div class="form-group">
+        <label for="secretcode">Secret Code</label>
+        <input type="text" id="secretcode" name="secretcode">
       </div>
       
       <div class="form-group">
