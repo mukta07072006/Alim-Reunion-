@@ -853,16 +853,21 @@
       document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
     }
 
-    // Formspree form handling
+    //  form handling
 document.addEventListener('DOMContentLoaded', function() {
   // Define your secret code
   const SECRET_CODE = "REUNION2025^JqES356"; // Change this to your actual secret code
+
+  // Check if already submitted
+  if (localStorage.getItem('magazineFormSubmitted')) {
+    disableForm();
+  }
 
   // Magazine form upload handling
   const magazineUploadArea = document.getElementById('magazineUploadArea');
   const photoInput = document.getElementById('photoInput');
   const imagePreview = document.getElementById('imagePreview');
-  const secretCodeInput = document.getElementById('secret-code'); // Make sure this matches your input ID
+  const secretCodeInput = document.getElementById('secret-code');
   const submitBtn = document.querySelector('#reunion-form button[type="submit"]');
 
   // Disable submit button initially (optional)
@@ -902,6 +907,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('reunion-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Check localStorage first
+    if (localStorage.getItem('magazineFormSubmitted')) {
+      alert('You have already submitted your information.');
+      return;
+    }
+    
     // Validate secret code
     const enteredCode = secretCodeInput ? secretCodeInput.value.trim() : '';
     if (enteredCode !== SECRET_CODE) {
@@ -924,6 +935,9 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => {
       if (response.ok) {
+        // Set localStorage flag on successful submission
+        localStorage.setItem('magazineFormSubmitted', 'true');
+        disableForm();
         alert('Thank you for registering!');
         this.reset();
         // Reset upload area
@@ -946,6 +960,23 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.textContent = 'Submit Registration';
     });
   });
+
+  function disableForm() {
+    const form = document.getElementById('reunion-form');
+    const inputs = form.querySelectorAll('input, button, textarea, select');
+    
+    inputs.forEach(input => {
+      input.disabled = true;
+    });
+    
+    // Add a message
+    const message = document.createElement('p');
+    message.textContent = 'You have already submitted your information. Thank you!';
+    message.style.color = 'var(--accent)';
+    message.style.marginTop = '1rem';
+    message.style.textAlign = 'center';
+    form.appendChild(message);
+  }
 
   // Initialize countdown
   setInterval(updateCountdown, 1000);
