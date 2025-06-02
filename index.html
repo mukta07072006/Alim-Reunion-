@@ -647,8 +647,8 @@
         <input type="text" id="address" name="address" required>
       </div>
       <div class="form-group">
-        <label for="secretcode">Secret Code*</label>
-        <input type="text" id="secretcode" name="secretcode required">
+        <label for="secret-code">Secret Code*</label>
+        <input type="text" id="secret-code" name="secret-code required">
       </div>
       
       <div class="form-group">
@@ -853,96 +853,120 @@
     }
 
     // Formspree form handling
-    document.addEventListener('DOMContentLoaded', function() {
-      // Magazine form upload handling
-      const magazineUploadArea = document.getElementById('magazineUploadArea');
-      const photoInput = document.getElementById('photoInput');
-      const imagePreview = document.getElementById('imagePreview');
+document.addEventListener('DOMContentLoaded', function() {
+  // Define your secret code
+  const SECRET_CODE = "REUNION2025^JqES356"; // Change this to your actual secret code
 
-      magazineUploadArea.addEventListener('click', () => {
-        photoInput.click();
-      });
+  // Magazine form upload handling
+  const magazineUploadArea = document.getElementById('magazineUploadArea');
+  const photoInput = document.getElementById('photoInput');
+  const imagePreview = document.getElementById('imagePreview');
+  const secretCodeInput = document.getElementById('secret-code'); // Make sure this matches your input ID
+  const submitBtn = document.querySelector('#reunion-form button[type="submit"]');
 
-      photoInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          // Check file size (5MB max)
-          if (file.size > 5 * 1024 * 1024) {
-            alert('File size too large (max 5MB)');
-            return;
-          }
-          
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            imagePreview.src = event.target.result;
-            imagePreview.style.display = 'block';
-            magazineUploadArea.classList.add('has-image');
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+  // Disable submit button initially (optional)
+  submitBtn.disabled = true;
 
-      // Form submission handler
-      document.getElementById('reunion-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        
-        // Show loading state
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Uploading...';
-        
-        fetch(this.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => {
-          if (response.ok) {
-            alert('Thank you for registering!');
-            this.reset();
-            // Reset upload area
-            imagePreview.style.display = 'none';
-            magazineUploadArea.classList.remove('has-image');
-            photoInput.value = '';
-          } else {
-            throw new Error('Form submission failed');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Submission failed. Please try again.');
-        })
-        .finally(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Registration';
-        });
-      });
-
-      // Initialize countdown
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-
-      // Set up intersection observer for fade-in effects
-      const fadeElements = document.querySelectorAll('.fade-in');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      fadeElements.forEach(el => {
-        el.style.opacity = 0;
-        el.style.transition = 'opacity 0.6s ease';
-        observer.observe(el);
-      });
+  // Real-time secret code validation (optional)
+  if (secretCodeInput) {
+    secretCodeInput.addEventListener('input', function() {
+      submitBtn.disabled = this.value.trim() !== SECRET_CODE;
     });
+  }
+
+  magazineUploadArea.addEventListener('click', () => {
+    photoInput.click();
+  });
+
+  photoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size too large (max 5MB)');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        imagePreview.src = event.target.result;
+        imagePreview.style.display = 'block';
+        magazineUploadArea.classList.add('has-image');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Form submission handler
+  document.getElementById('reunion-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate secret code
+    const enteredCode = secretCodeInput ? secretCodeInput.value.trim() : '';
+    if (enteredCode !== SECRET_CODE) {
+      alert('Invalid secret code. Please enter the correct code to submit.');
+      return;
+    }
+
+    const formData = new FormData(this);
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Uploading...';
+    
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Thank you for registering!');
+        this.reset();
+        // Reset upload area
+        imagePreview.style.display = 'none';
+        magazineUploadArea.classList.remove('has-image');
+        photoInput.value = '';
+        
+        // Reset secret code field if needed
+        if (secretCodeInput) secretCodeInput.value = '';
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Submission failed. Please try again.');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Registration';
+    });
+  });
+
+  // Initialize countdown
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Set up intersection observer for fade-in effects
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  fadeElements.forEach(el => {
+    el.style.opacity = 0;
+    el.style.transition = 'opacity 0.6s ease';
+    observer.observe(el);
+  });
+});
   </script>
 </body>
 </html>
