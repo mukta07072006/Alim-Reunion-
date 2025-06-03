@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jamea Ahmadia Reunion 2025</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
     :root {
       --primary-dark: #0a2e1d;
@@ -567,6 +568,11 @@
   display: block;
   margin: 0 auto;
 }
+    
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
     /* Animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -1139,6 +1145,19 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
 });
+  
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    slidesPerView: 1,
+    spaceBetween: 30,
+    effect: "slide",
+  });
+
   </script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </body>
 </html>
