@@ -1,0 +1,153 @@
+<html>
+
+<head>
+  
+</head>
+  <body>
+    <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photo').click()">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Click to upload your photo</p>
+      <p class="text-muted">(JPEG or PNG, max 5MB)</p>
+      <input type="file" id="photo" accept="image/*">
+    </div>
+
+    <div id="previewContainer" class="preview-container">
+      <img id="previewImage" class="preview-image" src="#" alt="Preview">
+      <button onclick="document.getElementById('photo').click()" style="margin-top: 1rem; width: auto;">
+        <i class="fas fa-sync-alt"></i> Change Photo
+      </button>
+    </div>
+
+    <button id="generateBtn" onclick="generateCard()" disabled>
+      <i class="fas fa-download"></i> Generate & Download Card
+    </button>
+
+    <canvas id="canvas" width="3000" height="1993"></canvas>
+  </div>
+
+
+
+<script>
+// Toggle upload area based on registration status
+    function toggleUploadArea(show) {
+      const uploadArea = document.getElementById('participationUploadArea');
+      const previewContainer = document.getElementById('previewContainer');
+      const generateBtn = document.getElementById('generateBtn');
+      
+      if (show) {
+        uploadArea.style.display = 'block';
+        previewContainer.style.display = 'none';
+        generateBtn.disabled = true;
+      } else {
+        uploadArea.style.display = 'none';
+        previewContainer.style.display = 'none';
+        generateBtn.disabled = true;
+        alert("Please register first to generate your participation card.");
+      }
+    }
+
+    // Photo upload preview for participation card
+    document.getElementById('photo').addEventListener('change', function(e) {
+      const previewContainer = document.getElementById('previewContainer');
+      const previewImage = document.getElementById('previewImage');
+      const generateBtn = document.getElementById('generateBtn');
+      
+      if (this.files && this.files[0]) {
+        // Check file size (5MB max)
+        if (this.files[0].size > 5 * 1024 * 1024) {
+          alert('File size too large (max 5MB)');
+          return;
+        }
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewContainer.style.display = 'block';
+          generateBtn.disabled = false;
+        }
+        
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    // Generate participation card with rounded corners
+    function generateCard() {
+      const photoInput = document.getElementById('photo');
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      if (!photoInput.files[0]) {
+        alert("Please upload your photo first.");
+        return;
+      }
+
+      // Show loading state
+      const generateBtn = document.getElementById('generateBtn');
+      generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+      generateBtn.disabled = true;
+
+      const template = new Image();
+      template.src = "template.jpg";
+      
+      template.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const userImg = new Image();
+          userImg.src = e.target.result;
+
+          userImg.onload = () => {
+            const size = Math.min(userImg.width, userImg.height);
+            const sx = (userImg.width - size) / 2;
+            const sy = (userImg.height - size) / 2;
+            
+            // Rounded corners implementation
+            const radius = 30;
+            const x = 1890, y = 1120, width = 500, height = 500;
+            
+            ctx.save();
+            
+            // Create clipping path
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.arcTo(x + width, y, x + width, y + height, radius);
+            ctx.arcTo(x + width, y + height, x, y + height, radius);
+            ctx.arcTo(x, y + height, x, y, radius);
+            ctx.arcTo(x, y, x + width, y, radius);
+            ctx.closePath();
+            ctx.clip();
+            
+            // Draw user image
+            ctx.drawImage(userImg, sx, sy, size, size, x, y, width, height);
+            
+            // Optional: Add white border
+            ctx.beginPath();
+            ctx.lineWidth = 16;
+            ctx.strokeStyle = "#0a2e1d";
+            ctx.roundRect(x, y, width, height, radius);
+            ctx.stroke();
+            
+            ctx.restore();
+
+            // Convert canvas to blob and download
+            canvas.toBlob(blob => {
+              const link = document.createElement('a');
+              link.href = URL.createObjectURL(blob);
+              link.download = 'reunion_participation_card.jpg';
+              link.click();
+              
+              // Reset button
+              generateBtn.innerHTML = '<i class="fas fa-download"></i> Generate & Download Card';
+              generateBtn.disabled = false;
+            }, 'image/jpeg', 0.9);
+          };
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      };
+    }
+</script>
+  </body>
+</html>
