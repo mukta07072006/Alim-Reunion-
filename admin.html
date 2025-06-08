@@ -238,15 +238,14 @@
 
             // Add custom text
             const customText = document.getElementById('customText').value.trim();
-            if (customText !== "") {
-              ctx.save();
-              ctx.font = "100px 'Hind Siliguri', sans-serif";
-              ctx.fillStyle = "#0a2e1d";
-              ctx.textAlign = "center";
-ctx.fillText(customText, boxX + boxWidth / 2, 1750);
-              ctx.restore();
-            }
-
+if (customText !== "") {
+  ctx.save();
+  ctx.font = "100px 'Hind Siliguri', sans-serif";
+  ctx.fillStyle = "#0a2e1d";
+  ctx.textAlign = "center";
+  ctx.fillText(customText, 1930 + 740 / 2, 1870); // Transparent box
+  ctx.restore();
+}
             canvas.toBlob(blob => {
               const link = document.createElement('a');
               link.href = URL.createObjectURL(blob);
