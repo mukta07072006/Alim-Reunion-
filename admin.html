@@ -14,8 +14,8 @@
 
     * {
       box-sizing: border-box;
-      margin: 30;
-      padding: 0;
+      margin: 60;
+      padding: 60;
     }
 
     body {
@@ -24,6 +24,9 @@
       color: var(--text-light);
       line-height: 1.6;
     }
+    .admintext {
+      justify-content:center;
+      color: var(--texr-light);
     .upload-area {
       border: 2px dashed var(--primary-light);
       border-radius: 12px;
@@ -99,6 +102,8 @@
   </style>
 </head>
   <body>
+    <div class="admintext">
+    <h1>Admin Panel</h1></div>
     <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photo').click()">
       <i class="fas fa-cloud-upload-alt"></i>
       <p>Click to upload your photo</p>
