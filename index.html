@@ -620,6 +620,20 @@
         gap: 1rem;
       }
     }
+    .admin-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .admin-button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -840,7 +854,7 @@
   </div>
 </div>
   </section>
-<a href="admin.html" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+<a href="javascript:void(0);" class="admin-button" onclick="checkCode()">
   <i class="fas fa-user-shield"></i> Admin
 </a>
   <!-- Footer -->
@@ -1161,7 +1175,15 @@ document.addEventListener('DOMContentLoaded', function() {
     spaceBetween: 30,
     effect: "slide",
   });
-
+function checkCode() {
+  const userCode = prompt("Enter Admin Code:");
+  const correctCode = "ARWbyMuktadir";
+  if (userCode === correctCode) {
+    window.location.href = "admin.html"; // Change to actual admin page URL if needed
+  } else {
+    alert("Incorrect code. Access denied.");
+  }
+}
   </script>
 </body>
 </html>
