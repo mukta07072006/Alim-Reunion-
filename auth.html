@@ -21,7 +21,6 @@
       width: 350px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      box-shadow: 0 8px 32px 0 rgba(0, 77, 38, 0.37);
       padding: 30px;
       text-align: center;
       backdrop-filter: blur(10px);
@@ -42,14 +41,12 @@
       background: linear-gradient(90deg, #00ff7f, #00cc66);
       border-radius: 12px;
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 0 10px #00ff7f, 0 0 20px #00cc66;
     }
     .message {
       font-size: 20px;
       font-weight: 600;
       margin-top: 15px;
       letter-spacing: 0.05em;
-      text-shadow: 0 0 5px #00ff7f;
       min-height: 28px;
     }
     .congrats {
@@ -101,7 +98,7 @@
           return;
         }
       } else {
-        width += 2;
+        width += 5;
         loadingProgress.style.width = width + '%';
       }
     }
