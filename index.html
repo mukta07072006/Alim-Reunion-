@@ -858,6 +858,9 @@
 <a href="javascript:void(0);" class="admin-button" onclick="checkCode()">
   <i class="fas fa-user-shield"></i> Admin
 </a>
+  <a href="javascript:void(0);" class="auth-button" onclick="checkCode()">
+  <i class="fas fa-user-shield"></i> Authentication 
+  </a>
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -995,7 +998,7 @@
     }
 
     // Countdown timer
-    const reunionDate = new Date(2025, 5, 21); // June 21, 2025
+    const reunionDate = new Date(2025, 5, 28); // June 21, 2025
 
     function updateCountdown() {
       const now = new Date();
@@ -1185,6 +1188,15 @@ function checkCode() {
     alert("Incorrect code. Access denied.");
   }
 }
+    function checkCode() {
+  const userCode = prompt("Enter Auth Code:");
+  const correctCode = "2143";
+  if (userCode === correctCode) {
+    window.location.href = "auth.html"; // Change to actual admin page URL if needed
+  } else {
+    alert("Incorrect code. Access denied.");
+  }
+    }
   </script>
 </body>
 </html>
