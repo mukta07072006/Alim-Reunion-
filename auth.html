@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Loading Bar Authorization</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      background: linear-gradient(135deg, #0a2e1d, #004d26);
+      color: #e0f7e9;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .container {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px 0 rgba(0, 77, 38, 0.37);
+      padding: 30px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .loading-bar {
+      width: 100%;
+      background: #00331a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 0 8px #00ff7f;
+      margin: 25px 0;
+      height: 25px;
+    }
+    .loading-progress {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #00ff7f, #00cc66);
+      border-radius: 12px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px #00ff7f, 0 0 20px #00cc66;
+    }
+    .message {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 15px;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 5px #00ff7f;
+      min-height: 28px;
+    }
+    .congrats {
+      font-size: 24px;
+      font-weight: 700;
+      color: #00ff7f;
+      margin-top: 20px;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ff7f, 0 0 20px #00cc66;
+      }
+      to {
+        text-shadow: 0 0 20px #00ff7f, 0 0 30px #00cc66;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="loading-bar">
+      <div class="loading-progress" id="loadingProgress"></div>
+    </div>
+    <div class="message" id="message">Starting authorization...</div>
+  </div>
+  <script>
+    const messages = [
+      "Authorizing name...",
+      "Authorizing address...",
+      "Authorizing number...",
+      "Congratulations 🎉 Entry Passed."
+    ];
+    const loadingProgress = document.getElementById('loadingProgress');
+    const message = document.getElementById('message');
+    let index = 0;
+    let width = 0;
+
+    function updateLoading() {
+      if (width >= 100) {
+        if (index < messages.length - 1) {
+          message.textContent = messages[index];
+          index++;
+          width = 0;
+          loadingProgress.style.width = '0%';
+        } else {
+          message.innerHTML = '<span class="congrats">' + messages[index] + '</span>';
+          clearInterval(interval);
+          return;
+        }
+      } else {
+        width += 2;
+        loadingProgress.style.width = width + '%';
+      }
+    }
+
+    const interval = setInterval(updateLoading, 100);
+  </script>
+</body>
+</html>
