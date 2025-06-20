@@ -858,9 +858,7 @@
 <a href="javascript:void(0);" class="admin-button" onclick="checkCode()">
   <i class="fas fa-user-shield"></i> Admin
 </a>
-  <a href="javascript:void(0);" class="auth-button" onclick="checkCode()">
-  <i class="fas fa-user-shield"></i> Authentication 
-  </a>
+  
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -1188,15 +1186,7 @@ function checkCode() {
     alert("Incorrect code. Access denied.");
   }
 }
-    function checkCode() {
-  const userCode = prompt("Enter Auth Code:");
-  const correctCode = "2143";
-  if (userCode === correctCode) {
-    window.location.href = "auth.html"; // Change to actual admin page URL if needed
-  } else {
-    alert("Incorrect code. Access denied.");
-  }
-    }
+    
   </script>
 </body>
 </html>
