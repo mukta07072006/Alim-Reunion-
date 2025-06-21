@@ -707,7 +707,8 @@
 
   <!-- Participation Card Form -->
   <div class="container fade-in">
-    <div><p>Downloading is available until 15th June.</p></div>
+    <div><p>Downloading Closed. <br>
+    Contact: 01877538505</p></div>
     <h2>Participation Card</h2>
     <div class="form-group">
       <label class="form-label">Did you register for the reunion?</label>
@@ -725,9 +726,9 @@
       </div>
     </div>
 
-    <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photo').click()">
+    <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photoClosed').click()">
       <i class="fas fa-cloud-upload-alt"></i>
-      <p>Click to upload your photo</p>
+      <p>Sorry :'(</p>
       <p class="text-muted">(JPEG or PNG, max 5MB)</p>
       <input type="file" id="photo" accept="image/*">
     </div>
@@ -739,8 +740,8 @@
       </button>
     </div>
 
-    <button id="generateBtn" onclick="generateCard()" disabled>
-      <i class="fas fa-download"></i> Generate & Download Card
+    <button id="generateBtn" onclick="generateColsedCard()" disabled>
+      <i class="fas fa-download"></i> Closed
     </button>
 
     <canvas id="canvas" width="3000" height="1993"></canvas>
