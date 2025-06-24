@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -772,7 +773,7 @@
       </div>
       <div class="form-group">
         <label for="secret-code">Secret Code*</label>
-        <input type="text" id="secret-code" name="secret-code required">
+        <input type="text" id="secret-code" name="secret-code" required>
       </div>
       
       <div class="form-group">
@@ -1153,8 +1154,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Initialize countdown
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+  
 
   // Set up intersection observer for fade-in effects
   const fadeElements = document.querySelectorAll('.fade-in');
