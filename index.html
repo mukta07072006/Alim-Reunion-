@@ -1,105 +1,126 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jamea Ahmadia Reunion 2025</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     :root {
       --primary-dark: #0a2e1d;
       --primary: #1b5e3f;
       --primary-light: #2d7d56;
       --accent: #4caf50;
+      --accent-light: #81c784;
       --text-light: #f5f5f5;
       --text-muted: #bdbdbd;
       --card-bg: #1e1e1e;
+      --card-hover: #2a2a2a;
+      --section-padding: 5rem 0;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #121212;
       color: var(--text-light);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Header & Navigation */
     header {
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: var(--box-shadow);
     }
 
-    header img {
+    .hero-image {
       width: 100%;
-      height: auto;
-      max-height: 50vh;
+      height: 60vh;
       object-fit: cover;
       display: block;
-      border-radius: 0 0 20px 20px;
+      filter: brightness(0.8);
     }
 
-    .header-text {
-      text-align: center;
+    .header-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       padding: 2rem;
-      background: var(--primary-dark);
+      background: linear-gradient(to top, rgba(10,46,29,0.9), transparent);
+      text-align: center;
     }
 
-    .header-text h1 {
-      font-size: 2.5rem;
+    .header-content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
       margin-bottom: 0.5rem;
-      color: var(--text-light);
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
-    .header-text p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
+    .header-content p {
+      color: var(--accent-light);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .navbar {
       display: flex;
       justify-content: center;
-      background-color: var(--primary-dark);
-      padding: 0.2rem;
+      background-color: rgba(10,46,29,0.9);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      white-space: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
-    .navbar a {
-      background-color: transparent;
-      border: none;
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
       color: var(--text-light);
-      padding: 0.8rem 1.5rem;
-      margin: 0 0.5rem;
+      text-decoration: none;
+      padding: 0.5rem 1.5rem;
       border-radius: 50px;
-      font-weight: 450;
-      cursor: pointer;
+      font-weight: 500;
       transition: all 0.3s ease;
       position: relative;
-      overflow: hidden;
-      text-decoration: none;
-      display: inline-block;
-      flex-shrink: 0;
     }
 
-    .navbar a:hover {
+    .nav-links a:hover {
       color: var(--accent);
-      transform: translateY(-2px);
     }
 
-    .navbar a::after {
+    .nav-links a::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -111,46 +132,47 @@
       transition: width 0.3s ease;
     }
 
-    .navbar a:hover::after {
-      width: 70%;
+    .nav-links a:hover::after {
+      width: 60%;
+    }
+
+    /* Main Content Sections */
+    section {
+      padding: var(--section-padding);
     }
 
     .container {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2.5rem;
-      background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: var(--text-light);
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
       position: relative;
       display: inline-block;
+      width: 100%;
     }
 
-    h2::after {
+    .section-title::after {
       content: '';
       position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60px;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
       height: 4px;
       background: var(--accent);
       border-radius: 2px;
     }
 
+    /* About Section */
     .about-section {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: var(--text-light);
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin: 3rem auto;
-      max-width: 800px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       position: relative;
       overflow: hidden;
     }
@@ -166,109 +188,60 @@
       z-index: 0;
     }
 
-    .about-section h2 {
-      color: white;
-    }
-
-    .about-section p {
+    .about-content {
       position: relative;
       z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .countdown-container {
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-      border-radius: 15px;
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .highlight {
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* Countdown Section */
+    .countdown-section {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      margin: 3rem auto;
+      max-width: 800px;
+      box-shadow: var(--box-shadow);
       text-align: center;
-      max-width: 500px;
-      margin: 20px auto;
-      backdrop-filter: blur(5px);
+    }
+
+    .countdown-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-light);
     }
 
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
-    /* Payment Section Styles */
-.payment-section {
-  background: var(--primary-dark);
-  color: var(--text-light);
-  padding: 1.5rem 0;
-  text-align: center;
-  border-bottom: 2px solid var(--accent);
-}
-
-.payment-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.payment-methods {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 1.5rem 0;
-  flex-wrap: wrap;
-}
-
-.payment-method {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  min-width: 250px;
-}
-
-.payment-icon {
-  font-size: 2rem;
-  color: var(--accent);
-}
-
-.payment-details h4 {
-  margin-bottom: 0.25rem;
-  color: var(--text-light);
-}
-
-.payment-details p {
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-}
-
-.payment-details small {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.payment-note {
-  color: var(--text-muted);
-  font-style: italic;
-  margin-top: 1rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .payment-methods {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .payment-method {
-    min-width: auto;
-    justify-content: center;
-  }
-}
 
     .countdown-item {
       background: var(--primary-dark);
-      padding: 15px;
-      border-radius: 10px;
-      min-width: 70px;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      min-width: 100px;
+      transition: transform 0.3s ease;
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-5px);
     }
 
     .countdown-item span {
@@ -277,14 +250,101 @@
       background: linear-gradient(to bottom, #fff, #e0e0e0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
     .countdown-item small {
-      display: block;
       color: var(--text-muted);
       text-transform: uppercase;
-      font-size: 0.8rem;
-      margin-top: 5px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    /* Payment Section */
+    .payment-section {
+      background: var(--primary-dark);
+      color: var(--text-light);
+      text-align: center;
+      border-top: 1px solid rgba(76,175,80,0.2);
+      border-bottom: 1px solid rgba(76,175,80,0.2);
+    }
+
+    .payment-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .payment-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .payment-methods {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .payment-method {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .payment-method:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .payment-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .payment-method h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-number {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--accent-light);
+    }
+
+    .payment-note {
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Form Section */
+    .form-section {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      margin: 3rem auto;
+      max-width: 800px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .form-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--text-light);
+      text-align: center;
     }
 
     .form-group {
@@ -297,71 +357,32 @@
       font-weight: 500;
       color: var(--text-light);
     }
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group input[type="text"],
-    .form-group input [type="text"],
-.form-group input [type="text"] {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--primary-light);
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--text-light);
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-    .radio-group {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--primary-light);
+      border-radius: var(--border-radius);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .radio-option {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .radio-option input {
-      display: none;
-    }
-
-    .radio-custom {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--primary-light);
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .radio-option input:checked + .radio-custom {
+    .form-control:focus {
+      outline: none;
       border-color: var(--accent);
-      background-color: var(--accent);
-    }
-
-    .radio-option input:checked + .radio-custom::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(76,175,80,0.2);
     }
 
     .upload-area {
       border: 2px dashed var(--primary-light);
-      border-radius: 12px;
+      border-radius: var(--border-radius);
       padding: 2rem;
       text-align: center;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
       cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
     }
 
     .upload-area:hover {
@@ -369,74 +390,128 @@
       background: rgba(76,175,80,0.05);
     }
 
-    .upload-area i {
+    .upload-icon {
       font-size: 2.5rem;
       color: var(--accent);
       margin-bottom: 1rem;
     }
 
-    .upload-area p {
+    .upload-text {
       color: var(--text-muted);
-      margin: 0;
     }
 
-    #photo {
+    #imagePreview {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: var(--border-radius);
+      margin-top: 1rem;
       display: none;
     }
 
-    .preview-container {
-      display: none;
-      margin-top: 1.5rem;
-      text-align: center;
-    }
-
-    .preview-image {
-      max-width: 200px;
-      max-height: 200px;
-      border-radius: 12px;
-      border: 2px solid var(--primary-light);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    button {
+    .btn {
       background: linear-gradient(135deg, var(--primary-light), var(--accent));
       color: white;
       border: none;
       padding: 1rem 2rem;
       border-radius: 50px;
       font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
-      box-shadow: 0 4px 15px rgba(76,175,80,0.3);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      text-decoration: none;
     }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(76,175,80,0.3);
     }
 
-    button:disabled {
+    .btn:disabled {
       background: #424242;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
+      opacity: 0.7;
     }
 
-    canvas {
-      display: none;
+    /* Team Section */
+    .team-section {
+      text-align: center;
     }
 
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--box-shadow);
+    }
+
+    .team-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      margin: 0 auto 1.5rem;
+    }
+
+    .team-name {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .team-role {
+      color: var(--accent-light);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .team-bio {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
     footer {
       background: var(--primary-dark);
       color: var(--text-light);
-      padding: 2rem;
+      padding: 3rem 0;
       text-align: center;
-      margin-top: 4rem;
     }
 
     .footer-content {
@@ -444,757 +519,588 @@
       margin: 0 auto;
     }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent-light);
     }
 
-    .social-links a {
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
       color: var(--text-light);
-      font-size: 1.5rem;
+      text-decoration: none;
       transition: color 0.3s ease;
     }
 
-    .social-links a:hover {
+    .footer-links a:hover {
       color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .footer-social a {
+      color: var(--text-light);
+      font-size: 1.5rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
     }
 
     .copyright {
       color: var(--text-muted);
       font-size: 0.9rem;
+      margin-top: 2rem;
     }
 
-    .meet-dev {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      text-align: center;
-      padding: 2.5rem;
-      margin: 3rem auto;
-      max-width: 800px;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-
-    .dev-profile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .dev-photo {
-      width: 150px;
-      height: 150px;
+    /* Admin Button */
+    .admin-button {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid var(--accent);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    .dev-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .dev-details h3 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-light);
-      background: linear-gradient(to right, #fff, #e0e0e0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .dev-details p {
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    .dev-social {
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .dev-social a {
-      color: var(--text-light);
       font-size: 1.5rem;
-      transition: transform 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
 
-    .dev-social a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
+    .admin-button:hover {
+      background: var(--accent);
+      transform: translateY(-3px) scale(1.1);
     }
 
-    .dev-bio {
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .form-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-    
-#magazineUploadArea {
-  position: relative;
-  overflow: hidden;
-}
-
-#imagePreview {
-  margin-top: 1rem;
-  border-radius: 4px;
-}
-
-.upload-area.has-image {
-  padding: 1rem;
-}
-
-.upload-area.has-image i, 
-.upload-area.has-image p {
-  display: none;
-}
-
-.upload-area.has-image #imagePreview {
-  display: block;
-  margin: 0 auto;
-}
-    
-  .swiper-slide {
-    display: flex;
-    justify-content: center;
-  }
-    /* Animation */
+    /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .fade-in {
-      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
     }
 
-    /* Responsive */
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .header-text h1 {
+      :root {
+        --section-padding: 3rem 0;
+      }
+
+      .header-content {
+        padding: 1.5rem;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .countdown-item {
+        min-width: 80px;
+        padding: 1rem;
+      }
+
+      .countdown-item span {
         font-size: 2rem;
       }
 
-      .container, .about-section, .meet-dev {
-        padding: 1.5rem;
-        margin: 1.5rem;
+      .form-section, .countdown-section {
+        padding: 2rem;
       }
 
-      .navbar {
-        flex-wrap: wrap;
-      }
-
-      .navbar a {
-        padding: 0.6rem 1rem;
-        margin: 0.3rem;
-        font-size: 0.9rem;
-      }
-
-      .dev-photo {
-        width: 120px;
-        height: 120px;
+      .team-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 480px) {
-      .header-text h1 {
-        font-size: 1.8rem;
+      .payment-method {
+        width: 100%;
       }
 
-      .radio-group {
-        flex-direction: column;
+      .countdown {
         gap: 1rem;
       }
+
+      .countdown-item {
+        min-width: 70px;
+      }
     }
-    .admin-button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007BFF;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
+
+    /* Swiper styles */
+    .swiper {
+      width: 100%;
+      padding: 2rem 0;
+    }
+
+    .swiper-slide {
+      display: flex;
       justify-content: center;
-    }
-    .admin-button:hover {
-      background-color: #0056b3;
+      align-items: center;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+  <!-- Header with Navigation -->
   <header>
-    <nav class="navbar">
-      <a href="#home"><i class="fas fa-home"></i> Home</a>
-      <a href="album.html"><i class="fas fa-images"></i> Album</a>
-    </nav>
+    <img src="20250601_033118.jpg" alt="Reunion Banner" class="hero-image">
+    <div class="header-content fade-in">
+      <h1>REUNION OF ALIM 2024</h1>
+      <p>Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
+    </div>
     
-    <img src="20250601_033118.jpg" alt="Reunion Banner">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-links">
+          <a href="#home"><i class="fas fa-home"></i> Home</a>
+          <a href="album.html"><i class="fas fa-images"></i> Album</a>
+        </div>
+      </div>
+    </nav>
   </header>
 
-  <div class="header-text">
-    <h1>REUNION OF ALIM 2024</h1>
-    <p>Jamea Ahmadia Sunnia Alia Kamil Madrasah</p>
-  </div>
-
-  <!-- About Section -->
-  <section class="about-section fade-in">
-    <h2>About the Reunion</h2>
-    <p>Join us on <strong>28 June 2025</strong> to celebrate our unforgettable journey together. This grand event will bring together students from our beloved institution. Let's reconnect, relive memories, and create new ones in this special gathering of our alumni community.</p>
-  </section>
-<!-- Add this right after your header/banner section -->
-<section class="payment-section fade-in">
-  <div class="payment-container">
-    <h3>Registration Fee/Donation</h3>
-    <div class="payment-methods">
-      <div class="payment-method">
-        <i class="fas fa-mobile-alt payment-icon"></i>
-        <div class="payment-details">
-          <h4>bKash</h4>
-          <p>01972887181</p>
-          <small>Personal</small>
+  <!-- Main Content -->
+  <main>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about-content fade-in">
+          <h2 class="section-title">About the Reunion</h2>
+          <p>Join us on <span class="highlight">28 June 2025</span> to celebrate our unforgettable journey together. This grand event will bring together students from our beloved institution. Let's reconnect, relive memories, and create new ones in this special gathering of our alumni community.</p>
         </div>
       </div>
-      <div class="payment-method">
-        <i class="fas fa-wallet payment-icon"></i>
-        <div class="payment-details">
-          <h4>Nagad</h4>
-          <p>01972887181</p>
-          <small>Personal</small>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section fade-in delay-1">
+      <h2 class="countdown-title">Time Until Reunion</h2>
+      <div class="countdown">
+        <div class="countdown-item">
+          <span id="days">00</span>
+          <small>Days</small>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">00</span>
+          <small>Hours</small>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">00</span>
+          <small>Minutes</small>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span>
+          <small>Seconds</small>
         </div>
       </div>
-    </div>
-    <p class="payment-note">Please send your payment and mention your name in the reference.</p>
-  </div>
-</section>
-  <div class="countdown-container fade-in">
-    <h3>Time Until Reunion</h3>
-    <div class="countdown">
-      <div class="countdown-item">
-        <span id="days">00</span>
-        <small>Days</small>
-      </div>
-      <div class="countdown-item">
-        <span id="hours">00</span>
-        <small>Hours</small>
-      </div>
-      <div class="countdown-item">
-        <span id="minutes">00</span>
-        <small>Minutes</small>
-      </div>
-      <div class="countdown-item">
-        <span id="seconds">00</span>
-        <small>Seconds</small>
-      </div>
-    </div>
+    </section>
 
-
-  <!-- Participation Card Form -->
-  <div class="container fade-in">
-    <div><p>Downloading Closed. <br>
-    </p></div>
-  <h2>Participation Card</h2>
-  </div>
-    <!-- <div class="form-group">
-      <label class="form-label">Did you register for the reunion?</label>
-      <div class="radio-group">
-        <label class="radio-option">
-          <input type="radio" name="registered" value="yes" onchange="toggleUploadArea(true)">
-          <span class="radio-custom"></span>
-          <span>Yes</span>
-        </label>
-        <label class="radio-option">
-          <input type="radio" name="registered" value="no" onchange="toggleUploadArea(false)">
-          <span class="radio-custom"></span>
-          <span>No</span>
-        </label>
-      </div> 
-    </div>
-
-    <div id="participationUploadArea" class="upload-area" onclick="document.getElementById('photoC').click()">
-      <i class="fas fa-cloud-upload-alt"></i>
-      <p>Sorry :'(</p>
-      
-      <input type="file" id="photo" accept="image/*">
-    </div>
-
-    <div id="previewContainer" class="preview-container">
-      <img id="previewImage" class="preview-image" src="#" alt="Preview">
-      <button onclick="document.getElementById('photo').click()" style="margin-top: 1rem; width: auto;">
-        <i class="fas fa-sync-alt"></i> Change Photo
-      </button>
-    </div>
-
-    <button id="generateBtn" onclick="generateCardC()" disabled>
-      <i class="fas fa-download"></i> Closed
-    </button>
--->
-   
-
-  <!-- Formspree Form -->
- <section class="magazine-info">
-  <div class="container fade-in">
-    <h2>Submit Info for Magazine</h2>
-    <form id="reunion-form" action="https://usebasin.com/f/f721e8c7516b" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="fullname">Full Name*</label>
-        <input type="text" id="fullname" name="name" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="wpnumber">Whats App Number*</label>
-        <input type="tel" id="wp" name="number" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="address">Address*</label>
-        <input type="text" id="address" name="address" required>
-      </div>
-      <div class="form-group">
-        <label for="size">T-shirt Size* <br> S/M/L/XL/XXL or Others</label>
-        <input type="text" id="size" name="size" required>
-      </div>
-      <div class="form-group">
-        <label for="secret-code">Secret Code*</label>
-        <input type="text" id="secret-code" name="secret-code" required>
-      </div>
-      
-      <div class="form-group">
-        <label>Profile Photo</label>
-        <div class="upload-area" id="magazineUploadArea">
-          <i class="fas fa-camera"></i>
-          <p>Click to upload your photo</p>
-          <img id="imagePreview" style="display: none; max-width: 100%; max-height: 200px;">
-          <input type="file" id="photoInput" name="photo" accept="image/*" style="display:none">
-        </div>
-      </div>
-      
-      <button type="submit">Submit Registration</button>
-    </form>
-  </div>
- </section>
-  <!-- Meet the Dev Section -->
-  <section class="meet-dev about-section fade-in">
-    <div class="dev-container">
-      <h2>Meet the Dev</h2>
-      
-      <div class="dev-profile">
-        <div class="dev-photo">
-          <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain">
+    <!-- Payment Section -->
+    <section id="payment" class="payment-section fade-in delay-2">
+      <div class="container">
+        <h2 class="payment-title">Registration Fee/Donation</h2>
+        <p class="payment-subtitle">Support our reunion by contributing through one of these payment methods</p>
+        
+        <div class="payment-methods">
+          <div class="payment-method">
+            <i class="fas fa-mobile-alt payment-icon"></i>
+            <h3>bKash</h3>
+            <div class="payment-number">01972887181</div>
+            <small>Personal</small>
+          </div>
+          
+          <div class="payment-method">
+            <i class="fas fa-wallet payment-icon"></i>
+            <h3>Nagad</h3>
+            <div class="payment-number">01972887181</div>
+            <small>Personal</small>
+          </div>
         </div>
         
-        <div class="dev-details">
-          <h3>Moshud Muktadir Al Hasnain</h3>
-          <p>Islamic Studies (CU)</p>
-          
-          <div class="dev-social">
-            <a href="https://github.com/mukta07072006" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="mailto:cr8v.muktadir@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-          </div>
+        <p class="payment-note">Please mention your name in the payment reference</p>
+      </div>
+    </section>
+
+    <!-- Participation Card Section -->
+    <section id="participation" class="fade-in delay-1">
+      <div class="container">
+        <div class="form-section">
+          <h2 class="form-title">Participation Card</h2>
+          <p style="text-align: center; margin-bottom: 2rem;">Downloading Closed</p>
         </div>
       </div>
-      
-      <p class="dev-bio">
-        Proud alumnus who built this platform to reconnect our batch. 
-        Passionate about using technology to bring people together.
-      </p>
-    </div>
-  </section>
-  <section class="meet-dev about-section fade-in">
-    <div class="dev-container">
-  <h2>Contributors</h2>
+    </section>
 
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-
-      <!-- Slide 1 -->
-      <div class="swiper-slide">
-        <div class="dev-profile">
-          <div class="dev-photo">
-            <img src="sihan.jpg" alt="Sihan">
-          </div>
-          <div class="dev-details">
-            <h3>Moinur Rahman Sihan</h3>
-            <p>Founder Well-Sira <br> Proud to be a part of this</p>
-          </div>
+    <!-- Magazine Form Section -->
+    <section id="magazine" class="fade-in delay-2">
+      <div class="container">
+        <div class="form-section">
+          <h2 class="form-title">Submit Info for Magazine</h2>
+          <form id="reunion-form" action="https://usebasin.com/f/f721e8c7516b" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="fullname" class="form-label">Full Name*</label>
+              <input type="text" id="fullname" name="name" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="wpnumber" class="form-label">WhatsApp Number*</label>
+              <input type="tel" id="wp" name="number" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="address" class="form-label">Address*</label>
+              <input type="text" id="address" name="address" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="size" class="form-label">T-shirt Size*</label>
+              <input type="text" id="size" name="size" class="form-control" placeholder="S/M/L/XL/XXL or Others" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="secret-code" class="form-label">Secret Code*</label>
+              <input type="text" id="secret-code" name="secret-code" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Profile Photo</label>
+              <div class="upload-area" id="magazineUploadArea">
+                <i class="fas fa-camera upload-icon"></i>
+                <p class="upload-text">Click to upload your photo</p>
+                <img id="imagePreview" class="preview-image">
+                <input type="file" id="photoInput" name="photo" accept="image/*" style="display:none">
+              </div>
+            </div>
+            
+            <button type="submit" class="btn">
+              <i class="fas fa-paper-plane"></i> Submit Registration
+            </button>
+          </form>
         </div>
       </div>
+    </section>
 
-      <!-- Slide 2 -->
-      <div class="swiper-slide">
-        <div class="dev-profile">
-          <div class="dev-photo">
-            <img src="saiful.jpg" alt="Sajjad">
-          </div>
-          <div class="dev-details">
-            <h3>Saiful Islam</h3>
-            <p>I hope this program will bring us together.</p>
+    <!-- Team Section -->
+    <section id="team" class="team-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Our Team</h2>
+        
+        <!-- Developer Profile -->
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain" class="team-photo">
+            <h3 class="team-name">Moshud Muktadir Al Hasnain</h3>
+            <p class="team-role">Developer</p>
+            <p class="team-bio">Proud alumnus who built this platform to reconnect our batch. Passionate about using technology to bring people together.</p>
+            <div class="social-links">
+              <a href="https://github.com/mukta07072006" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank"><i class="fab fa-facebook"></i></a>
+              <a href="mailto:cr8v.muktadir@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            </div>
           </div>
         </div>
+        
+        <!-- Contributors Slider -->
+        <div class="swiper mySwiper">
+          <h3 style="text-align: center; margin: 2rem 0 1rem; color: var(--accent-light);">Contributors</h3>
+          <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+              <div class="team-card">
+                <img src="sihan.jpg" alt="Sihan" class="team-photo">
+                <h3 class="team-name">Moinur Rahman Sihan</h3>
+                <p class="team-role">Founder Well-Sira</p>
+                <p class="team-bio">Proud to be a part of this initiative to reconnect our alumni community.</p>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="team-card">
+                <img src="saiful.jpg" alt="Saiful" class="team-photo">
+                <h3 class="team-name">Saiful Islam</h3>
+                <p class="team-role">Contributor</p>
+                <p class="team-bio">I hope this program will bring us together and strengthen our bonds.</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
       </div>
+    </section>
+  </main>
 
-      <!-- Add more .swiper-slide blocks here -->
-
-    </div>
-  </div>
-</div>
-  </section>
-<a href="javascript:void(0);" class="admin-button" onclick="checkCode()">
-  <i class="fas fa-user-shield"></i> Admin
-</a>
-  
   <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="social-links">
-        <a href="https://www.facebook.com/share/1BUncs6Jrt/"><i class="fab fa-facebook"></i></a>
-        <a href="https://chat.whatsapp.com/Cc3BOhQVMxuI4khIrR7MAZ"><i class="fab fa-whatsapp"></i></a>
+  <footer class="fade-in delay-3">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">Jamea Ahmadia Reunion 2025</div>
+        
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#payment">Payment</a>
+          <a href="#magazine">Magazine</a>
+          <a href="album.html">Album</a>
+        </div>
+        
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BUncs6Jrt/" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="https://chat.whatsapp.com/Cc3BOhQVMxuI4khIrR7MAZ" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p class="copyright">
+          © 2025 Jamea Ahmadia Reunion. All rights reserved.<br>
+          Designed by <a href="https://www.facebook.com/share/1BrXJuuRAB/" style="color: var(--accent-light);">Moshud Muktadir Al Hasnain</a>
+        </p>
       </div>
-      <p class="copyright">© 2025 Jamea Ahmadia Reunion. All rights reserved.</p>
-      <p class="copyright">Designed by <a href="https://www.facebook.com/share/1BrXJuuRAB/">Moshud Muktadir Al Hasnain</a></p>
     </div>
   </footer>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js">
-</script>
-  
-  <script>
-    // Toggle upload area based on registration status
-    function toggleUploadArea(show) {
-      const uploadArea = document.getElementById('participationUploadArea');
-      const previewContainer = document.getElementById('previewContainer');
-      const generateBtn = document.getElementById('generateBtn');
-      
-      if (show) {
-        uploadArea.style.display = 'block';
-        previewContainer.style.display = 'none';
-        generateBtn.disabled = true;
-      } else {
-        uploadArea.style.display = 'none';
-        previewContainer.style.display = 'none';
-        generateBtn.disabled = true;
-        alert("Please register first to generate your participation card.");
-      }
-    }
 
-    // Photo upload preview for participation card
-    document.getElementById('photo').addEventListener('change', function(e) {
-      const previewContainer = document.getElementById('previewContainer');
-      const previewImage = document.getElementById('previewImage');
-      const generateBtn = document.getElementById('generateBtn');
+  <!-- Admin Button -->
+  <a href="javascript:void(0);" class="admin-button" onclick="checkCode()" title="Admin Access">
+    <i class="fas fa-user-shield"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize Swiper
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 1,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        }
+      }
+    });
+
+    // Countdown Timer
+    document.addEventListener("DOMContentLoaded", function() {
+      const reunionDate = new Date("2025-06-28T10:00:00");
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = reunionDate - now;
+
+        if (diff <= 0) {
+          document.querySelector(".countdown").innerHTML =
+            '<div class="event-reached">The reunion has started! 🎉</div>';
+          clearInterval(timer);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(2, "0");
+        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+      }
+
+      updateCountdown();
+      const timer = setInterval(updateCountdown, 1000);
+    });
+
+    // Magazine Form Handling
+    document.addEventListener('DOMContentLoaded', function() {
+      const SECRET_CODE = "REUNION2025^JqES667";
       
-      if (this.files && this.files[0]) {
-        // Check file size (5MB max)
-        if (this.files[0].size > 5 * 1024 * 1024) {
-          alert('File size too large (max 5MB)');
+      // Check if already submitted
+      if (localStorage.getItem('magazineFormSubmitted')) {
+        disableForm();
+      }
+
+      // Upload area functionality
+      const magazineUploadArea = document.getElementById('magazineUploadArea');
+      const photoInput = document.getElementById('photoInput');
+      const imagePreview = document.getElementById('imagePreview');
+      const secretCodeInput = document.getElementById('secret-code');
+      const submitBtn = document.querySelector('#reunion-form button[type="submit"]');
+
+      // Disable submit button initially if secret code is required
+      if (secretCodeInput) {
+        submitBtn.disabled = true;
+        secretCodeInput.addEventListener('input', function() {
+          submitBtn.disabled = this.value.trim() !== SECRET_CODE;
+        });
+      }
+
+      magazineUploadArea.addEventListener('click', () => {
+        photoInput.click();
+      });
+
+      photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          // Check file size (5MB max)
+          if (file.size > 5 * 1024 * 1024) {
+            alert('File size too large (max 5MB)');
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            imagePreview.src = event.target.result;
+            imagePreview.style.display = 'block';
+            magazineUploadArea.querySelector('.upload-icon').style.display = 'none';
+            magazineUploadArea.querySelector('.upload-text').style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission handler
+      document.getElementById('reunion-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Check localStorage first
+        if (localStorage.getItem('magazineFormSubmitted')) {
+          alert('You have already submitted your information.');
           return;
         }
         
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-          previewImage.src = e.target.result;
-          previewContainer.style.display = 'block';
-          generateBtn.disabled = false;
+        // Validate secret code
+        const enteredCode = secretCodeInput ? secretCodeInput.value.trim() : '';
+        if (enteredCode !== SECRET_CODE) {
+          alert('Invalid secret code. Please enter the correct code to submit.');
+          return;
         }
+
+        const formData = new FormData(this);
         
-        reader.readAsDataURL(this.files[0]);
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+        
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            // Set localStorage flag on successful submission
+            localStorage.setItem('magazineFormSubmitted', 'true');
+            disableForm();
+            alert('Thank you for registering!');
+            this.reset();
+            // Reset upload area
+            imagePreview.style.display = 'none';
+            magazineUploadArea.querySelector('.upload-icon').style.display = 'block';
+            magazineUploadArea.querySelector('.upload-text').style.display = 'block';
+            photoInput.value = '';
+            
+            // Reset secret code field if needed
+            if (secretCodeInput) secretCodeInput.value = '';
+          } else {
+            throw new Error('Form submission failed');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Submission failed. Please try again.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+        });
+      });
+
+      function disableForm() {
+        const form = document.getElementById('reunion-form');
+        const inputs = form.querySelectorAll('input, button, textarea, select');
+        
+        inputs.forEach(input => {
+          input.disabled = true;
+        });
+        
+        // Add a message
+        const message = document.createElement('p');
+        message.textContent = 'You have already submitted your information. Thank you!';
+        message.style.color = 'var(--accent)';
+        message.style.marginTop = '1rem';
+        message.style.textAlign = 'center';
+        form.appendChild(message);
       }
     });
 
-    // Generate participation card with rounded corners
-    function generateCard() {
-      const photoInput = document.getElementById('photo');
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
-
-      if (!photoInput.files[0]) {
-        alert("Please upload your photo first.");
-        return;
-      }
-
-      // Show loading state
-      const generateBtn = document.getElementById('generateBtn');
-      generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-      generateBtn.disabled = true;
-
-      const template = new Image();
-      template.src = "template.jpg";
-      
-      template.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const userImg = new Image();
-          userImg.src = e.target.result;
-
-          userImg.onload = () => {
-            const size = Math.min(userImg.width, userImg.height);
-            const sx = (userImg.width - size) / 2;
-            const sy = (userImg.height - size) / 2;
-            
-            // Rounded corners implementation
-            const radius = 30;
-            const x = 1890, y = 1120, width = 500, height = 500;
-            
-            ctx.save();
-            
-            // Create clipping path
-            ctx.beginPath();
-            ctx.moveTo(x + radius, y);
-            ctx.arcTo(x + width, y, x + width, y + height, radius);
-            ctx.arcTo(x + width, y + height, x, y + height, radius);
-            ctx.arcTo(x, y + height, x, y, radius);
-            ctx.arcTo(x, y, x + width, y, radius);
-            ctx.closePath();
-            ctx.clip();
-            
-            // Draw user image
-            ctx.drawImage(userImg, sx, sy, size, size, x, y, width, height);
-            
-            // Optional: Add white border
-            ctx.beginPath();
-            ctx.lineWidth = 16;
-            ctx.strokeStyle = "#0a2e1d";
-            ctx.roundRect(x, y, width, height, radius);
-            ctx.stroke();
-            
-            ctx.restore();
-
-            // Convert canvas to blob and download
-            canvas.toBlob(blob => {
-              const link = document.createElement('a');
-              link.href = URL.createObjectURL(blob);
-              link.download = 'reunion_participation_card.jpg';
-              link.click();
-              
-              // Reset button
-              generateBtn.innerHTML = '<i class="fas fa-download"></i> Generate & Download Card';
-              generateBtn.disabled = false;
-            }, 'image/jpeg', 0.9);
-          };
-        };
-        reader.readAsDataURL(photoInput.files[0]);
-      };
-    }
-
-    // Countdown timer
-  
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const reunionDate = new Date("2025-06-28T10:00:00"); // June 28, 2025 at 10 AM
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = reunionDate - now;
-
-      if (diff <= 0) {
-        document.querySelector(".countdown").innerHTML =
-          '<div class="event-reached">The reunion has started! 🎉</div>';
-        clearInterval(timer);
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById("days").textContent = String(days).padStart(2, "0");
-      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-    }
-
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-  });
-    //  form handling
-document.addEventListener('DOMContentLoaded', function() {
-  // Define your secret code
-  const SECRET_CODE = "REUNION2025^JqES667"; // Change this to your actual secret code
-
-  // Check if already submitted
-  if (localStorage.getItem('magazineFormSubmitted')) {
-    disableForm();
-  }
-
-  // Magazine form upload handling
-  const magazineUploadArea = document.getElementById('magazineUploadArea');
-  const photoInput = document.getElementById('photoInput');
-  const imagePreview = document.getElementById('imagePreview');
-  const secretCodeInput = document.getElementById('secret-code');
-  const submitBtn = document.querySelector('#reunion-form button[type="submit"]');
-
-  // Disable submit button initially (optional)
-  submitBtn.disabled = true;
-
-  // Real-time secret code validation (optional)
-  if (secretCodeInput) {
-    secretCodeInput.addEventListener('input', function() {
-      submitBtn.disabled = this.value.trim() !== SECRET_CODE;
-    });
-  }
-
-  magazineUploadArea.addEventListener('click', () => {
-    photoInput.click();
-  });
-
-  photoInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Check file size (5MB max)
-      if (file.size > 5 * 1024 * 1024) {
-        alert('File size too large (max 5MB)');
-        return;
-      }
-      
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        imagePreview.src = event.target.result;
-        imagePreview.style.display = 'block';
-        magazineUploadArea.classList.add('has-image');
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // Form submission handler
-  document.getElementById('reunion-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Check localStorage first
-    if (localStorage.getItem('magazineFormSubmitted')) {
-      alert('You have already submitted your information.');
-      return;
-    }
-    
-    // Validate secret code
-    const enteredCode = secretCodeInput ? secretCodeInput.value.trim() : '';
-    if (enteredCode !== SECRET_CODE) {
-      alert('Invalid secret code. Please enter the correct code to submit.');
-      return;
-    }
-
-    const formData = new FormData(this);
-    
-    // Show loading state
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Uploading...';
-    
-    fetch(this.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        // Set localStorage flag on successful submission
-        localStorage.setItem('magazineFormSubmitted', 'true');
-        disableForm();
-        alert('Thank you for registering!');
-        this.reset();
-        // Reset upload area
-        imagePreview.style.display = 'none';
-        magazineUploadArea.classList.remove('has-image');
-        photoInput.value = '';
-        
-        // Reset secret code field if needed
-        if (secretCodeInput) secretCodeInput.value = '';
+    // Admin access function
+    function checkCode() {
+      const userCode = prompt("Enter Admin Code:");
+      const correctCode = "ARWbyMuktadir";
+      if (userCode === correctCode) {
+        window.location.href = "admin.html";
       } else {
-        throw new Error('Form submission failed');
+        alert("Incorrect code. Access denied.");
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Submission failed. Please try again.');
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Registration';
-    });
-  });
+    }
 
-  function disableForm() {
-    const form = document.getElementById('reunion-form');
-    const inputs = form.querySelectorAll('input, button, textarea, select');
+    // Intersection Observer for animations
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
     
-    inputs.forEach(input => {
-      input.disabled = true;
+    fadeElements.forEach(el => {
+      el.style.opacity = 0;
+      el.style.transition = 'opacity 0.8s ease';
+      observer.observe(el);
     });
-    
-    // Add a message
-    const message = document.createElement('p');
-    message.textContent = 'You have already submitted your information. Thank you!';
-    message.style.color = 'var(--accent)';
-    message.style.marginTop = '1rem';
-    message.style.textAlign = 'center';
-    form.appendChild(message);
-  }
-
-  // Initialize countdown
-  
-
-  // Set up intersection observer for fade-in effects
-  const fadeElements = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  fadeElements.forEach(el => {
-    el.style.opacity = 0;
-    el.style.transition = 'opacity 0.6s ease';
-    observer.observe(el);
-  });
-});
-  
-  var swiper = new 
-    Swiper(".mySwiper", {
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    spaceBetween: 30,
-    effect: "slide",
-  });
-function checkCode() {
-  const userCode = prompt("Enter Admin Code:");
-  const correctCode = "ARWbyMuktadir";
-  if (userCode === correctCode) {
-    window.location.href = "admin.html"; // Change to actual admin page URL if needed
-  } else {
-    alert("Incorrect code. Access denied.");
-  }
-}
-    
   </script>
 </body>
 </html>
