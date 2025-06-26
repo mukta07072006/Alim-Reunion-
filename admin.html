@@ -150,6 +150,8 @@
   <!-- Text input under the photo -->
   <div class="text" id="text"> 
   <input type="text" id="customText" placeholder="Enter your name or any text"></div>
+  <div class="text2" id="text2"> 
+  <input type="text" id="customText2" placeholder="Enter Time"></div>
 
   <button id="generateBtn" onclick="generateCard()" disabled>
     <i class="fas fa-download"></i> Generate & Download Card
@@ -239,6 +241,15 @@
             // Add custom text
             const customText = document.getElementById('customText').value.trim();
 if (customText !== "") {
+  ctx.save();
+  ctx.font = "100px 'Hind Siliguri', sans-serif";
+  ctx.fillStyle = "#0a2e1d";
+  ctx.textAlign = "center";
+  ctx.fillText(customText, 1870 + 530 / 2, 1750); // Transparent box
+  ctx.restore();
+}
+             const customText = document.getElementById('customText2').value.trim();
+if (customText2 !== "") {
   ctx.save();
   ctx.font = "100px 'Hind Siliguri', sans-serif";
   ctx.fillStyle = "#0a2e1d";
