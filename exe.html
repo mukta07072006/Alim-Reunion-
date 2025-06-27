@@ -15,6 +15,11 @@
             --text-muted: #bdbdbd;
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
+            --section-padding: 5rem 0;
+            --border-radius: 16px;
+            --box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            --image-border: 4px solid var(--primary-dark);
+            --image-size: 140px;
         }
 
         * {
@@ -59,8 +64,10 @@
             box-shadow: var(--box-shadow);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
             position: relative;
-            padding-bottom: 2rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 550px; /* Increased minimum height */
         }
 
         .profile-card:hover {
@@ -99,7 +106,10 @@
         }
 
         .profile-info {
-            padding: 0 2rem;
+            padding: 0 2rem 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .profile-name {
@@ -136,13 +146,27 @@
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
             line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 150px;
+            padding: 0 0.5rem;
+        }
+
+        .profile-bio::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .profile-bio::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 2px;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: auto;
+            padding-top: 1rem;
         }
 
         .social-link {
@@ -183,6 +207,10 @@
                 font-size: 2.2rem;
                 margin-bottom: 3rem;
             }
+            
+            .profile-card {
+                min-height: 500px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -201,31 +229,30 @@
                 <div class="profile-info">
                     <h2 class="profile-name">Moshud Muktadir</h2>
                     <p class="profile-title">EXECUTIVE</p>
-                    <p class="profile-bio">Moshud Muktadir is a visionary creative professional specializing in modern web designand Graphics Design. With a keen eye for detail and a passion for clean, functional aesthetics, he conceptualized and executed the entire design system for this Reunion Program </p>
+                    <p class="profile-bio">Moshud Muktadir is a visionary creative professional specializing in modern web design and Graphics Design. With a keen eye for detail and a passion for clean, functional aesthetics, he conceptualized and executed the entire design system for this Reunion Program.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 2 -->
-            <div class="profile-card" id="sarah">
+            <div class="profile-card" id="sihan">
                 <div class="profile-image-container">
                     <img src="sihan.jpg" alt="Moinur Rahman Sihan" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Moinur Rahman Sihan</h2>
                     <p class="profile-title">Chief Executive</p>
-                    <p class="profile-bio">Moinur Rahman Sihan is the strategic mind behind the reunion’s financial success, expertly managing budgets, sponsorships, and donor relations. His meticulous planning and passionate outreach have been instrumental in raising funds to make this reunion unforgettable.</p>
+                    <p class="profile-bio">Moinur Rahman Sihan is the strategic mind behind the reunion's financial success, expertly managing budgets, sponsorships, and donor relations. His meticulous planning and passionate outreach have been instrumental in raising funds to make this reunion unforgettable.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-in"></i></a>
-                    
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 3 -->
-            <div class="profile-card" id="david">
+            <div class="profile-card" id="saiful">
                 <div class="profile-image-container">
                     <img src="saiful.jpg" alt="Saiful Islam" class="profile-image">
                 </div>
@@ -236,15 +263,14 @@
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 4 -->
-            <div class="profile-card" id="amit">
+            <div class="profile-card" id="raihan">
                 <div class="profile-image-container">
-                    <img src="raihan.jpg" alt="Amit Patel" class="profile-image">
+                    <img src="raihan.jpg" alt="Mohammad Raihan" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Mohammad Raihan</h2>
@@ -253,92 +279,86 @@
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 5 -->
-            <div class="profile-card" id="lisa">
+            <div class="profile-card" id="sayem">
                 <div class="profile-image-container">
                     <img src="sayem.jpg" alt="Sayem Al Mahbub" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Sayem Al Mahbub</h2>
                     <p class="profile-title">Executive</p>
-                    <p class="profile-bio">Sayem Al Mahbub poured his heart and soul into crafting the reunion magazine, working around the clock to transform memories into a timeless keepsake. His obsessive attention to detail and boundless energy turned what could have been a simple booklet into a masterpiece of shared history</p>
+                    <p class="profile-bio">Sayem Al Mahbub poured his heart and soul into crafting the reunion magazine, working around the clock to transform memories into a timeless keepsake. His obsessive attention to detail and boundless energy turned what could have been a simple booklet into a masterpiece of shared history.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 6 -->
-            <div class="profile-card" id="james">
+            <div class="profile-card" id="mofiz">
                 <div class="profile-image-container">
-                    <img src="mofiz.jpg" alt="Mofiz" class="profile-image">
+                    <img src="mofiz.jpg" alt="Mofizur Rahman" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Mofizur Rahman</h2>
-                    <p class="profile-title"Executive</p>
+                    <p class="profile-title">Executive</p>
                     <p class="profile-bio">Mofizur Rahman was the unsung hero who amplified every initiative, working shoulder-to-shoulder with Mohammad Saiful Islam to turn visionary ideas into reality. His selfless dedication in the shadows made others' successes shine brighter.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 7 -->
-            <div class="profile-card" id="priya">
+            <div class="profile-card" id="anas">
                 <div class="profile-image-container">
                     <img src="anas.jpg" alt="Moinuddin Anas" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Moinuddin Anas</h2>
                     <p class="profile-title">Executive</p>
-                    <p class="profile-bio">Moinuddin Anas took charge of weaving together our reunion's most important thread - its people. With a blend of persistence and charm, he ensured every special guest felt personally welcomed and value.</p>
+                    <p class="profile-bio">Moinuddin Anas took charge of weaving together our reunion's most important thread - its people. With a blend of persistence and charm, he ensured every special guest felt personally welcomed and valued.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 8 -->
-            <div class="profile-card" id="michael">
+            <div class="profile-card" id="talha">
                 <div class="profile-image-container">
-                    <img src="talha.jpg" alt="Talha" class="profile-image">
+                    <img src="talha.jpg" alt="MD Talha" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">MD Talha</h2>
                     <p class="profile-title">Executive</p>
-                    <p class="profile-bio">Null.</p>
+                    <p class="profile-bio">Details coming soon.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 9 -->
-            <div class="profile-card" id="emma">
+            <div class="profile-card" id="rashid">
                 <div class="profile-image-container">
                     <img src="rashid.jpg" alt="Rashidul Islam" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h2 class="profile-name">Rashidul Islam</h2>
                     <p class="profile-title">Executive</p>
-                    <p class="profile-bio">Null..</p>
+                    <p class="profile-bio">Details coming soon.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
