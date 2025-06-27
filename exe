@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Team</title>
+    <style>
+        :root {
+            --primary-dark: #0a2e1d;
+            --primary: #1b5e3f;
+            --primary-light: #2d7d56;
+            --accent: #4caf50;
+            --accent-light: #81c784;
+            --text-light: #f5f5f5;
+            --text-muted: #bdbdbd;
+            --card-bg: #1e1e1e;
+            --card-hover: #2a2a2a;
+            --section-padding: 5rem 0;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--section-padding);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-light);
+            font-size: 2.5rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-hover);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-light);
+        }
+
+        .profile-info {
+            padding: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .profile-title {
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .profile-bio {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .profile-contact {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .profile-contact i {
+            color: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Executive Team</h1>
+        
+        <div class="team-grid">
+            <!-- Member 1 -->
+            <div class="profile-card" id="moshud">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Moshud Hossain" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Moshud Hossain</h2>
+                    <p class="profile-title">Chief Executive Officer</p>
+                    <p class="profile-bio">Visionary leader with 15+ years of experience in strategic planning and business development.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>moshud@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 2 -->
+            <div class="profile-card" id="sarah">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Sarah Johnson</h2>
+                    <p class="profile-title">Chief Financial Officer</p>
+                    <p class="profile-bio">Financial strategist with expertise in global markets and investment management.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>sarah@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 234-5678</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 3 -->
+            <div class="profile-card" id="david">
+                <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="David Chen" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">David Chen</h2>
+                    <p class="profile-title">Chief Technology Officer</p>
+                    <p class="profile-bio">Innovative technologist driving digital transformation and product development.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>david@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 345-6789</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 4 -->
+            <div class="profile-card" id="amit">
+                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Amit Patel" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Amit Patel</h2>
+                    <p class="profile-title">Chief Operating Officer</p>
+                    <p class="profile-bio">Operations expert focused on efficiency, scalability, and process optimization.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>amit@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 456-7890</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 5 -->
+            <div class="profile-card" id="lisa">
+                <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Lisa Rodriguez" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Lisa Rodriguez</h2>
+                    <p class="profile-title">Chief Marketing Officer</p>
+                    <p class="profile-bio">Creative marketer with a passion for brand storytelling and customer engagement.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>lisa@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 567-8901</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 6 -->
+            <div class="profile-card" id="james">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="James Wilson" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">James Wilson</h2>
+                    <p class="profile-title">Chief Human Resources Officer</p>
+                    <p class="profile-bio">HR leader focused on talent development and organizational culture.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>james@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 678-9012</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 7 -->
+            <div class="profile-card" id="priya">
+                <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Priya Gupta" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Priya Gupta</h2>
+                    <p class="profile-title">Chief Product Officer</p>
+                    <p class="profile-bio">Product visionary with a track record of successful launches and market fit.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>priya@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 789-0123</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 8 -->
+            <div class="profile-card" id="michael">
+                <img src="https://randomuser.me/api/portraits/men/19.jpg" alt="Michael Brown" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Michael Brown</h2>
+                    <p class="profile-title">Chief Legal Officer</p>
+                    <p class="profile-bio">Legal expert ensuring compliance and managing corporate governance.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>michael@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 890-1234</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 9 -->
+            <div class="profile-card" id="emma">
+                <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Emma Davis" class="profile-image">
+                <div class="profile-info">
+                    <h2 class="profile-name">Emma Davis</h2>
+                    <p class="profile-title">Chief Sustainability Officer</p>
+                    <p class="profile-bio">Sustainability champion driving environmental and social responsibility initiatives.</p>
+                    <div class="profile-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>emma@jk.com</span>
+                    </div>
+                    <div class="profile-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 901-2345</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
