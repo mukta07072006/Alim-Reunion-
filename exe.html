@@ -16,15 +16,17 @@
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
             --section-padding: 5rem 0;
-            --border-radius: 12px;
+            --border-radius: 16px;
             --box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            --image-border: 4px solid var(--primary-dark);
+            --image-size: 140px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
@@ -41,15 +43,17 @@
 
         h1 {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             color: var(--accent-light);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             padding: 0 2rem;
         }
 
@@ -58,227 +62,288 @@
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            padding-bottom: 2rem;
+            text-align: center;
         }
 
         .profile-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             background: var(--card-hover);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .profile-image-container {
+            position: relative;
+            margin: -70px auto 1.5rem;
+            width: var(--image-size);
+            height: var(--image-size);
+            border-radius: 50%;
+            border: var(--image-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover .profile-image-container {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.4);
+            border-color: var(--accent);
         }
 
         .profile-image {
-            width: 100%;
-            height: 250px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            border-radius: 50%;
             object-fit: cover;
-            border-bottom: 4px solid var(--primary-light);
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
         .profile-info {
-            padding: 1.5rem;
+            padding: 0 2rem;
         }
 
         .profile-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 0.5rem;
-            color: var(--accent);
+            color: var(--text-light);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
         }
 
         .profile-title {
             color: var(--accent-light);
-            margin-bottom: 1rem;
+            margin: 1rem 0;
             font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
         .profile-bio {
             color: var(--text-muted);
             margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        .profile-contact {
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .profile-contact i {
-            color: var(--primary-light);
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            z-index: 0;
         }
 
         @media (max-width: 768px) {
             .team-grid {
                 grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 3rem;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Executive Team</h1>
+        <h1>Executive Leadership</h1>
         
         <div class="team-grid">
             <!-- Member 1 -->
             <div class="profile-card" id="moshud">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Moshud Hossain" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="hasnain.jpg" alt="Moshud Muktadir" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Moshud Hossain</h2>
-                    <p class="profile-title">Chief Executive Officer</p>
-                    <p class="profile-bio">Visionary leader with 15+ years of experience in strategic planning and business development.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>moshud@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4567</span>
+                    <h2 class="profile-name">Moshud Muktadir</h2>
+                    <p class="profile-title">EXECUTIVE</p>
+                    <p class="profile-bio">Moshud Muktadir is a visionary creative professional specializing in modern web designand Graphics Design. With a keen eye for detail and a passion for clean, functional aesthetics, he conceptualized and executed the entire design system for this Reunion Program </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram-in"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 2 -->
             <div class="profile-card" id="sarah">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="sihan.jpg" alt="Moinur Rahman Sihan" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Sarah Johnson</h2>
-                    <p class="profile-title">Chief Financial Officer</p>
-                    <p class="profile-bio">Financial strategist with expertise in global markets and investment management.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>sarah@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 234-5678</span>
+                    <h2 class="profile-name">Moinur Rahman Sihan/h2>
+                    <p class="profile-title">Chief Executive</p>
+                    <p class="profile-bio">Moinur Rahman Sihan is the strategic mind behind the reunion’s financial success, expertly managing budgets, sponsorships, and donor relations. His meticulous planning and passionate outreach have been instrumental in raising funds to make this reunion unforgettable.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-in"></i></a>
+                    
                     </div>
                 </div>
             </div>
             
             <!-- Member 3 -->
             <div class="profile-card" id="david">
-                <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="David Chen" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="saiful.jpg" alt="Saiful Islam" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">David Chen</h2>
-                    <p class="profile-title">Chief Technology Officer</p>
-                    <p class="profile-bio">Innovative technologist driving digital transformation and product development.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>david@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 345-6789</span>
+                    <h2 class="profile-name">Saiful Islam</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Mohammad Saiful Islam was the heartbeat of our reunion, seamlessly bridging gaps between students, teachers, and alumni while providing critical support across all initiatives. His unparalleled dedication to fostering connections and funding key projects made this celebration possible.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 4 -->
             <div class="profile-card" id="amit">
-                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Amit Patel" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="raihan.jpg" alt="Amit Patel" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Amit Patel</h2>
-                    <p class="profile-title">Chief Operating Officer</p>
-                    <p class="profile-bio">Operations expert focused on efficiency, scalability, and process optimization.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>amit@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 456-7890</span>
+                    <h2 class="profile-name">Mohammad Raihan</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Mohammad Raihan served as the dynamic right-hand to the finance team, working closely with Moinur Rahman Sihan to ensure the reunion's financial success. More than just an assistant, Raihan brought innovative ideas to the table and executed critical behind-the-scenes operations that kept fundraising efforts running smoothly.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 5 -->
             <div class="profile-card" id="lisa">
-                <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Lisa Rodriguez" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="sayem.jpg" alt="Sayem Al Mahbub" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Lisa Rodriguez</h2>
-                    <p class="profile-title">Chief Marketing Officer</p>
-                    <p class="profile-bio">Creative marketer with a passion for brand storytelling and customer engagement.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>lisa@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 567-8901</span>
+                    <h2 class="profile-name">Sayem Al Mahbub</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Sayem Al Mahbub poured his heart and soul into crafting the reunion magazine, working around the clock to transform memories into a timeless keepsake. His obsessive attention to detail and boundless energy turned what could have been a simple booklet into a masterpiece of shared history</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 6 -->
             <div class="profile-card" id="james">
-                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="James Wilson" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="mofiz.jpg" alt="Mofiz" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">James Wilson</h2>
-                    <p class="profile-title">Chief Human Resources Officer</p>
-                    <p class="profile-bio">HR leader focused on talent development and organizational culture.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>james@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 678-9012</span>
+                    <h2 class="profile-name">Mofizur Rahman</h2>
+                    <p class="profile-title"Executive</p>
+                    <p class="profile-bio">Mofizur Rahman was the unsung hero who amplified every initiative, working shoulder-to-shoulder with Mohammad Saiful Islam to turn visionary ideas into reality. His selfless dedication in the shadows made others' successes shine brighter.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 7 -->
             <div class="profile-card" id="priya">
-                <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Priya Gupta" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="anas.jpg" alt="Moinuddin Anas" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Priya Gupta</h2>
-                    <p class="profile-title">Chief Product Officer</p>
-                    <p class="profile-bio">Product visionary with a track record of successful launches and market fit.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>priya@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 789-0123</span>
+                    <h2 class="profile-name">Moinuddin Anas</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Moinuddin Anas took charge of weaving together our reunion's most important thread - its people. With a blend of persistence and charm, he ensured every special guest felt personally welcomed and value.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 8 -->
             <div class="profile-card" id="michael">
-                <img src="https://randomuser.me/api/portraits/men/19.jpg" alt="Michael Brown" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="talha.jpg" alt="Talha" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Michael Brown</h2>
-                    <p class="profile-title">Chief Legal Officer</p>
-                    <p class="profile-bio">Legal expert ensuring compliance and managing corporate governance.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>michael@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 890-1234</span>
+                    <h2 class="profile-name">MD Talha</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Null.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Member 9 -->
             <div class="profile-card" id="emma">
-                <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Emma Davis" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="rashid.jpg" alt="Rashidul Islam" class="profile-image">
+                </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Emma Davis</h2>
-                    <p class="profile-title">Chief Sustainability Officer</p>
-                    <p class="profile-bio">Sustainability champion driving environmental and social responsibility initiatives.</p>
-                    <div class="profile-contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>emma@jk.com</span>
-                    </div>
-                    <div class="profile-contact">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 901-2345</span>
+                    <h2 class="profile-name">Rashidul Islam</h2>
+                    <p class="profile-title">Executive</p>
+                    <p class="profile-bio">Null..</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-share-alt"></i></a>
                     </div>
                 </div>
             </div>
