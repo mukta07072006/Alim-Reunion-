@@ -764,54 +764,57 @@
       </div>
     </section>
 
-    <!-- Magazine Form Section -->
-    <section id="magazine" class="fade-in delay-2">
-      <div class="container">
-        <div class="form-section">
-          <h2 class="form-title">Submit Info for Magazine</h2>
-          <form id="reunion-form" action="https://usebasin.com/f/f721e8c7516b" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <label for="fullname" class="form-label">Full Name*</label>
-              <input type="text" id="fullname" name="name" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="wpnumber" class="form-label">WhatsApp Number*</label>
-              <input type="tel" id="wp" name="number" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="address" class="form-label">Address*</label>
-              <input type="text" id="address" name="address" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="size" class="form-label">T-shirt Size*</label>
-              <input type="text" id="size" name="size" class="form-control" placeholder="S/M/L/XL/XXL or Others" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="secret-code" class="form-label">Secret Code*</label>
-              <input type="text" id="secret-code" name="secret-code" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label">Profile Photo</label>
-              <div class="upload-area" id="magazineUploadArea">
-                <i class="fas fa-camera upload-icon"></i>
-                <p class="upload-text">Click to upload your photo</p>
-                <img id="imagePreview" class="preview-image">
-                <input type="file" id="photoInput" name="photo" accept="image/*" style="display:none">
-              </div>
-            </div>
-            
-            <button type="submit" class="btn">
-              <i class="fas fa-paper-plane"></i> Submit Registration
-            </button>
-          </form>
+  <section id="magazine" class="fade-in delay-2" style="position: relative;">
+  <div class="container" style="filter: blur(5px); pointer-events: none;">
+    <div class="form-section">
+      <h2 class="form-title">Submit Info for Magazine</h2>
+      <form id="reunion-form" action="https://usebasin.com/f/f721e8c7516b" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="fullname" class="form-label">Full Name*</label>
+          <input type="text" id="fullname" name="name" class="form-control" required disabled>
         </div>
-      </div>
-    </section>
+        
+        <div class="form-group">
+          <label for="wpnumber" class="form-label">WhatsApp Number*</label>
+          <input type="tel" id="wp" name="number" class="form-control" required disabled>
+        </div>
+        
+        <div class="form-group">
+          <label for="address" class="form-label">Address*</label>
+          <input type="text" id="address" name="address" class="form-control" required disabled>
+        </div>
+        
+        <div class="form-group">
+          <label for="size" class="form-label">T-shirt Size*</label>
+          <input type="text" id="size" name="size" class="form-control" placeholder="S/M/L/XL/XXL or Others" required disabled>
+        </div>
+        
+        <div class="form-group">
+          <label for="secret-code" class="form-label">Secret Code*</label>
+          <input type="text" id="secret-code" name="secret-code" class="form-control" required disabled>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Profile Photo</label>
+          <div class="upload-area" id="magazineUploadArea">
+            <i class="fas fa-camera upload-icon"></i>
+            <p class="upload-text">Click to upload your photo</p>
+            <img id="imagePreview" class="preview-image">
+            <input type="file" id="photoInput" name="photo" accept="image/*" style="display:none" disabled>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn" disabled>
+          <i class="fas fa-paper-plane"></i> Submit Registration
+        </button>
+      </form>
+    </div>
+  </div>
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+    <h2 style="font-size: 3em; color: #ff0000; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">CLOSED</h2>
+    <p style="font-size: 1.5em; color: #333;">Magazine information collection has ended</p>
+  </div>
+</section>
 
     <!-- Team Section -->
     <section id="team" class="team-section fade-in">
