@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jamea Ahmadia Reunion - Memories Album</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary: #1b5e3f;
@@ -12,6 +13,12 @@
       --light: #f8f9fa;
       --dark:  #0a2e1d;
       --gray: #ffffff;
+      --card-bg: #fff;
+      --border-radius: 10px;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --text-light: #333;
+      --accent-light: #1b5e3f;
+      --text-muted: #666;
     }
     
     * {
@@ -27,7 +34,7 @@
       line-height: 1.6;
     }
     
-     .hero-image {
+    .hero-image {
       width: 100%;
       height: auto;
       max-height: 50vh;
@@ -169,12 +176,15 @@
       transform: translateY(-5px);
     }
     
-    .gallery-item::before {
-      content: "Coming Soon";
-      position: absolute;
-      color: var(--gray);
-      font-weight: bold;
-      z-index: 1;
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
     }
     
     .video-icon {
@@ -189,6 +199,11 @@
       padding: 3rem 2rem;
       text-align: center;
       margin: 3rem 0;
+      border-radius: 10px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
     
     .upload-info h2 {
@@ -222,8 +237,33 @@
       box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
     }
 
-      .team-section {
+    .team-section {
       text-align: center;
+      padding: 4rem 2rem;
+      background-color: white;
+      margin: 3rem auto;
+      max-width: 1200px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .team-section h2 {
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .team-section h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
     }
 
     .team-grid {
@@ -238,6 +278,7 @@
       border-radius: var(--border-radius);
       padding: 2rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
     .team-card:hover {
@@ -252,6 +293,11 @@
       object-fit: cover;
       border: 4px solid var(--accent);
       margin: 0 auto 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .team-card:hover .team-photo {
+      transform: scale(1.05);
     }
 
     .team-name {
@@ -271,7 +317,202 @@
       margin-bottom: 1.5rem;
     }
 
-   
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .social-links a {
+      color: white;
+      background: var(--primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+
+    /* Photo Upload Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .form-group input, 
+    .form-group textarea {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    #file-input {
+      padding: 0.5rem;
+    }
+
+    /* Reunion Highlights */
+    .highlights {
+      background-color: white;
+      padding: 3rem 2rem;
+      margin: 3rem auto;
+      max-width: 1200px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .highlights h2 {
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .highlights h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .highlight-stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-item {
+      background: var(--light);
+      padding: 1.5rem;
+      border-radius: 10px;
+      min-width: 150px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 2rem;
+    }
+
+    .photo-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1/1;
+      background: #f0f0f0;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-item:hover {
+      transform: scale(1.03);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-item:hover .photo-caption {
+      transform: translateY(0);
+    }
     
     footer {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -344,12 +585,35 @@
       .countdown-number {
         font-size: 1.5rem;
       }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+
+      .highlight-stats {
+        flex-direction: column;
+        align-items: center;
+      }
     }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
   <header>
-        <img src="hero.jpg" alt="Reunion Banner" class="hero-image">
+    <img src="hero.jpg" alt="Reunion Banner" class="hero-image">
     <div class="header-content fade-in">
     </div>
 
@@ -358,83 +622,199 @@
       <p class="subtitle">Relive the unforgettable moments from our special gathering</p>
       
       <div class="coming-soon">
-        <h2>Album Coming Soon</h2>
-        <p>Our photo and video gallery will be available after the program concludes. Check back to see all the special moments captured during our reunion!</p>
+        <h2>Reunion 2024 Highlights</h2>
+        <p>Our reunion was a grand success! Relive all the special moments captured during this memorable event.</p>
         
         <div class="countdown">
           <div class="countdown-item">
-            <div class="countdown-number" id="days">00</div>
-            <div class="countdown-label">Days</div>
+            <div class="countdown-number" id="days">120</div>
+            <div class="countdown-label">Photos</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="hours">00</div>
-            <div class="countdown-label">Hours</div>
+            <div class="countdown-number" id="hours">8</div>
+            <div class="countdown-label">Videos</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="minutes">00</div>
-            <div class="countdown-label">Minutes</div>
+            <div class="countdown-number" id="minutes">75</div>
+            <div class="countdown-label">Attendees</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="seconds">00</div>
-            <div class="countdown-label">Seconds</div>
+            <div class="countdown-number" id="seconds">24</div>
+            <div class="countdown-label">Speakers</div>
           </div>
         </div>
       </div>
     </div>
   </header>
   
-  <section class="album-preview">
-    <h2>Memories from Reunion 24</h2>
-    <p>Share Yours</p></p>
+  <section class="highlights">
+    <h2>Reunion Highlights</h2>
+    <p>Our reunion was filled with laughter, memories, and joy. Here are some key moments:</p>
     
-    <div class="gallery-grid">
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item">
-        <div class="video-icon">▶</div>
+    <div class="highlight-stats">
+      <div class="stat-item fade-in delay-1">
+        <div class="stat-number">75</div>
+        <div class="stat-label">Batchmates Reunited</div>
       </div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item">
-        <div class="video-icon">▶</div>
+      <div class="stat-item fade-in delay-2">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Days of Events</div>
       </div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
+      <div class="stat-item fade-in delay-3">
+        <div class="stat-number">120+</div>
+        <div class="stat-label">Photos Shared</div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="album-preview">
+    <h2>Gallery Highlights</h2>
+    <p>Browse through some of our favorite moments from the reunion</p>
+    
+    <div class="photo-grid">
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?reunion,group" alt="Group photo">
+        <div class="photo-caption">Opening ceremony group photo</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?speech,event" alt="Keynote speech">
+        <div class="photo-caption">Principal's keynote address</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?dinner,party" alt="Gala dinner">
+        <div class="photo-caption">Gala dinner celebration</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?award,ceremony" alt="Awards">
+        <div class="photo-caption">Achievement awards</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?friends,laughing" alt="Friends reunion">
+        <div class="photo-caption">Batchmates reunited</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?campus,tour" alt="Campus tour">
+        <div class="photo-caption">Campus nostalgia tour</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?performance,stage" alt="Cultural performance">
+        <div class="photo-caption">Cultural performances</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?sports,game" alt="Sports event">
+        <div class="photo-caption">Friendly sports match</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?lecture,class" alt="Lecture">
+        <div class="photo-caption">Special lecture session</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?food,dining" alt="Food">
+        <div class="photo-caption">Delicious food stalls</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?children,playing" alt="Family">
+        <div class="photo-caption">Family activities</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?fireworks,night" alt="Fireworks">
+        <div class="photo-caption">Closing fireworks</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?group,photo" alt="Group photo 2">
+        <div class="photo-caption">Batch photo 2005</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?teacher,students" alt="Teachers">
+        <div class="photo-caption">With beloved teachers</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?memories,old" alt="Memories">
+        <div class="photo-caption">Memory lane exhibition</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?workshop,activity" alt="Workshop">
+        <div class="photo-caption">Interactive workshop</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?music,concert" alt="Concert">
+        <div class="photo-caption">Musical evening</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?speech,alumni" alt="Speech">
+        <div class="photo-caption">Alumni speech</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?gift,ceremony" alt="Gifts">
+        <div class="photo-caption">Token of appreciation</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://source.unsplash.com/random/300x300/?goodbye,hug" alt="Farewell">
+        <div class="photo-caption">Emotional farewells</div>
+      </div>
     </div>
   </section>
   
   <section class="upload-info">
     <h2>Share Your Memories</h2>
-    <p>After the event, you'll be able to upload your own photos and videos from the reunion to contribute to our collective memory book.</p>
-    <a href="#" class="btn">Upload Your Photos</a>
+    <p>Upload your own photos and videos from the reunion to contribute to our collective memory book. Help us preserve these precious moments for years to come.</p>
+    <button id="upload-btn" class="btn">Upload Your Photos</button>
     
-  </section>
-   <section id="team" class="team-section fade-in">
-      <div class="container">
-        <h2 class="section-title">Develoaper</h2>
-        
-        <!-- Developer Profile -->
-        <div class="team-grid">
-          <div class="team-card">
-            <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain" class="team-photo">
-            <h3 class="team-name">Moshud Muktadir Al Hasnain</h3>
-            <p class="team-role">Developer</p>
-            <p class="team-bio">Proud alumnus who built this platform to reconnect our batch. Passionate about using technology to bring people together.</p>
-            <div class="social-links">
-              <a href="https://github.com/mukta07072006" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank"><i class="fab fa-facebook"></i></a>
-              <a href="mailto:cr8v.muktadir@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-            </div>
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Upload Your Reunion Photos</h2>
+        <form class="upload-form" id="photo-upload-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required placeholder="Enter your full name">
           </div>
+          <div class="form-group">
+            <label for="batch">Batch Year</label>
+            <input type="text" id="batch" required placeholder="Enter your batch year">
+          </div>
+          <div class="form-group">
+            <label for="description">Photo Description</label>
+            <textarea id="description" placeholder="Describe the moment or people in the photo"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="file-input">Select Photos</label>
+            <input type="file" id="file-input" multiple accept="image/*,video/*">
+          </div>
+          <button type="submit" class="btn">Submit Photos</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <section id="team" class="team-section">
+    <h2 class="section-title">Meet The Developer</h2>
+    
+    <div class="team-grid">
+      <div class="team-card fade-in">
+        <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain" class="team-photo">
+        <h3 class="team-name">Moshud Muktadir Al Hasnain</h3>
+        <p class="team-role">Developer & Alumni</p>
+        <p class="team-bio">As a proud alumnus of Jamea Ahmadia, I created this platform to help our batch reconnect and preserve our shared memories. With expertise in web development and a passion for bringing people together, I've designed this site to be a lasting digital home for our reunion experiences.</p>
+        <div class="social-links">
+          <a href="https://github.com/mukta07072006" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="mailto:cr8v.muktadir@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
-        
+      </div>
+    </div>
+  </section>
+  
   <footer>
     <div class="footer-content">
       <div class="social-links">
-        <a href="#"><i>f</i></a>
-        <a href="#"><i>in</i></a>
-        <a href="#"><i>t</i></a>
-        <a href="#"><i>ig</i></a>
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
       <p class="copyright">© 2025 Jamea Ahmadia Reunion. All rights reserved.</p>
       <p class="copyright">Designed by <a href="https://www.facebook.com/share/1BrXJuuRAB/">Moshud Muktadir Al Hasnain</a></p>
@@ -442,38 +822,56 @@
   </footer>
   
   <script>
-    // Set the date we're counting down to (replace with your actual event end date)
-    const countDownDate = new Date("Jun 30, 2025 23:59:59").getTime();
-    
-    // Update the countdown every 1 second
-    const countdown = setInterval(function() {
-      // Get today's date and time
-      const now = new Date().getTime();
-      
-      // Find the distance between now and the countdown date
-      const distance = countDownDate - now;
-      
-      // Time calculations for days, hours, minutes and seconds
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      // Display the result
-      document.getElementById("days").innerHTML = days.toString().padStart(2, "0");
-      document.getElementById("hours").innerHTML = hours.toString().padStart(2, "0");
-      document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, "0");
-      document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, "0");
-      
-      // If the countdown is finished
-      if (distance < 0) {
-        clearInterval(countdown);
-        document.getElementById("days").innerHTML = "00";
-        document.getElementById("hours").innerHTML = "00";
-        document.getElementById("minutes").innerHTML = "00";
-        document.getElementById("seconds").innerHTML = "00";
+    // Photo Upload Modal functionality
+    const modal = document.getElementById("upload-modal");
+    const btn = document.getElementById("upload-btn");
+    const span = document.getElementsByClassName("close")[0];
+    const form = document.getElementById("photo-upload-form");
+
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
       }
-    }, 1000);
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for sharing your photos! They will be reviewed and added to the gallery soon.");
+      modal.style.display = "none";
+      form.reset();
+    });
+
+    // Animation for elements as they come into view
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.fade-in');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if(elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // Initialize animations
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+    });
   </script>
 </body>
 </html>
