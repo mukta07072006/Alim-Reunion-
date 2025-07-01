@@ -8,10 +8,10 @@
   <style>
     :root {
       --primary: #1b5e3f;
-      --secondary:  #0a2e1d;
+      --secondary: #0a2e1d;
       --accent: #000000;
       --light: #f8f9fa;
-      --dark:  #0a2e1d;
+      --dark: #0a2e1d;
       --gray: #ffffff;
       --card-bg: #fff;
       --border-radius: 10px;
@@ -152,46 +152,47 @@
       background: var(--accent);
     }
     
-    .gallery-grid {
+    .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
       margin-top: 2rem;
     }
-    
-    .gallery-item {
+
+    .photo-item {
       position: relative;
-      overflow: hidden;
       border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      overflow: hidden;
       aspect-ratio: 1/1;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #f0f0f0;
+      transition: transform 0.3s ease;
     }
-    
-    .gallery-item:hover {
-      transform: translateY(-5px);
+
+    .photo-item:hover {
+      transform: scale(1.03);
     }
-    
-    .gallery-item img {
+
+    .photo-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
     }
-    
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    
-    .video-icon {
+
+    .photo-caption {
       position: absolute;
-      font-size: 3rem;
-      color: rgba(255, 255, 255, 0.7);
-      z-index: 1;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-item:hover .photo-caption {
+      transform: translateY(0);
     }
     
     .upload-info {
@@ -214,7 +215,7 @@
     .upload-info p {
       max-width: 700px;
       margin: 0 auto 2rem;
-      color: var(--gray);
+      color: var(--text-muted);
     }
     
     .btn {
@@ -408,8 +409,25 @@
       resize: vertical;
     }
 
-    #file-input {
+    #photo-upload {
       padding: 0.5rem;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      background: #eee;
+      border-radius: 5px;
+      margin: 10px 0;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: var(--primary);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.3s;
     }
 
     /* Reunion Highlights */
@@ -468,50 +486,6 @@
     .stat-label {
       color: var(--text-muted);
       font-size: 0.9rem;
-    }
-
-    /* Photo Grid */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 2rem;
-    }
-
-    .photo-item {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      aspect-ratio: 1/1;
-      background: #f0f0f0;
-      transition: transform 0.3s ease;
-    }
-
-    .photo-item:hover {
-      transform: scale(1.03);
-    }
-
-    .photo-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 0.5rem;
-      font-size: 0.8rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .photo-item:hover .photo-caption {
-      transform: translateY(0);
     }
     
     footer {
@@ -627,19 +601,19 @@
         
         <div class="countdown">
           <div class="countdown-item">
-            <div class="countdown-number" id="days">120</div>
+            <div class="countdown-number" id="days">500+</div>
             <div class="countdown-label">Photos</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="hours">8</div>
+            <div class="countdown-number" id="hours">2</div>
             <div class="countdown-label">Videos</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="minutes">75</div>
+            <div class="countdown-number" id="minutes">300+</div>
             <div class="countdown-label">Attendees</div>
           </div>
           <div class="countdown-item">
-            <div class="countdown-number" id="seconds">24</div>
+            <div class="countdown-number" id="seconds">40+</div>
             <div class="countdown-label">Speakers</div>
           </div>
         </div>
@@ -653,15 +627,15 @@
     
     <div class="highlight-stats">
       <div class="stat-item fade-in delay-1">
-        <div class="stat-number">75</div>
-        <div class="stat-label">Batchmates Reunited</div>
+        <div class="stat-number">300+</div>
+        <div class="stat-label">Reunited</div>
       </div>
       <div class="stat-item fade-in delay-2">
-        <div class="stat-number">3</div>
+        <div class="stat-number">1</div>
         <div class="stat-label">Days of Events</div>
       </div>
       <div class="stat-item fade-in delay-3">
-        <div class="stat-number">120+</div>
+        <div class="stat-number">500+</div>
         <div class="stat-label">Photos Shared</div>
       </div>
     </div>
@@ -670,10 +644,10 @@
   <section class="album-preview">
     <h2>Gallery Highlights</h2>
     <p>Browse through some of our favorite moments from the reunion</p>
-    
-    <div class="photo-grid">
+
+     <div class="photo-grid">
       <div class="photo-item">
-        <img src="https://source.unsplash.com/random/300x300/?reunion,group" alt="Group photo">
+        <img src="album (15).jpg" alt="Group photo">
         <div class="photo-caption">Opening ceremony group photo</div>
       </div>
       <div class="photo-item">
@@ -753,11 +727,15 @@
         <div class="photo-caption">Emotional farewells</div>
       </div>
     </div>
+    
+    <div class="photo-grid" id="gallery">
+
+    </div>
   </section>
   
   <section class="upload-info">
     <h2>Share Your Memories</h2>
-    <p>Upload your own photos and videos from the reunion to contribute to our collective memory book. Help us preserve these precious moments for years to come.</p>
+    <p>Upload your own photos from the reunion to contribute to our collective memory book.</p>
     <button id="upload-btn" class="btn">Upload Your Photos</button>
     
     <!-- Upload Modal -->
@@ -767,20 +745,20 @@
         <h2>Upload Your Reunion Photos</h2>
         <form class="upload-form" id="photo-upload-form">
           <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" required placeholder="Enter your full name">
+            <label for="uploader-name">Your Name</label>
+            <input type="text" id="uploader-name" required placeholder="Enter your full name">
           </div>
           <div class="form-group">
-            <label for="batch">Batch Year</label>
-            <input type="text" id="batch" required placeholder="Enter your batch year">
+            <label for="photo-description">Photo Description</label>
+            <textarea id="photo-description" placeholder="Describe the moment or people in the photo"></textarea>
           </div>
           <div class="form-group">
-            <label for="description">Photo Description</label>
-            <textarea id="description" placeholder="Describe the moment or people in the photo"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="file-input">Select Photos</label>
-            <input type="file" id="file-input" multiple accept="image/*,video/*">
+            <label for="photo-upload">Select Photos (Max 5MB each)</label>
+            <input type="file" id="photo-upload" multiple accept="image/*">
+            <div class="progress-container" id="progress-container">
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="upload-status"></p>
           </div>
           <button type="submit" class="btn">Submit Photos</button>
         </form>
@@ -796,13 +774,11 @@
         <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain" class="team-photo">
         <h3 class="team-name">Moshud Muktadir Al Hasnain</h3>
         <p class="team-role">Developer & Alumni</p>
-        <p class="team-bio">As a proud alumnus of Jamea Ahmadia, I created this platform to help our batch reconnect and preserve our shared memories. With expertise in web development and a passion for bringing people together, I've designed this site to be a lasting digital home for our reunion experiences.</p>
+        <p class="team-bio">As a proud alumnus of Jamea Ahmadia, I created this platform to help our batch reconnect and preserve our shared memories.</p>
         <div class="social-links">
           <a href="https://github.com/mukta07072006" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
           <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="mailto:cr8v.muktadir@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -814,64 +790,149 @@
         <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
         <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
       <p class="copyright">© 2025 Jamea Ahmadia Reunion. All rights reserved.</p>
       <p class="copyright">Designed by <a href="https://www.facebook.com/share/1BrXJuuRAB/">Moshud Muktadir Al Hasnain</a></p>
     </div>
   </footer>
-  
+
   <script>
-    // Photo Upload Modal functionality
-    const modal = document.getElementById("upload-modal");
-    const btn = document.getElementById("upload-btn");
-    const span = document.getElementsByClassName("close")[0];
-    const form = document.getElementById("photo-upload-form");
+   // Configuration
+const PUBLISHED_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3MG1TSn-apnH2ZMaeBrtVMcj1g4C-_5auDod6UMcHOpoAk6XdnTAqePCJv2UujNSPNRdHdpiQCd9R/pub?output=csv";
+const IMGBB_API_KEY = "46b1df1b1d0dc220a768b4f16148d20c"; // Get from https://api.imgbb.com
 
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
+// DOM Elements
+const modal = document.getElementById("upload-modal");
+const uploadBtn = document.getElementById("upload-btn");
+const closeBtn = document.getElementsByClassName("close")[0];
+const form = document.getElementById("photo-upload-form");
+const progressBar = document.getElementById("progress-bar");
+const progressContainer = document.getElementById("progress-container");
+const statusEl = document.getElementById("upload-status");
 
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
+// Modal Controls
+uploadBtn.onclick = () => modal.style.display = "block";
+closeBtn.onclick = () => {
+  modal.style.display = "none";
+  form.reset();
+};
+window.onclick = (e) => e.target == modal && (modal.style.display = "none");
 
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+// Photo Upload Handler
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById("uploader-name").value;
+  const description = document.getElementById("photo-description").value;
+  const files = document.getElementById("photo-upload").files;
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Thank you for sharing your photos! They will be reviewed and added to the gallery soon.");
-      modal.style.display = "none";
-      form.reset();
-    });
+  if (files.length === 0) {
+    statusEl.textContent = "Please select at least one photo";
+    return;
+  }
 
-    // Animation for elements as they come into view
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.fade-in');
+  progressContainer.style.display = "block";
+  statusEl.textContent = "Uploading...";
+  progressBar.style.width = "0%";
+
+  try {
+    const uploadPromises = [];
+    
+    // Process each file
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       
-      elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        
-        if(elementPosition < screenPosition) {
-          element.style.opacity = '1';
-          element.style.transform = 'translateY(0)';
-        }
-      });
-    };
+      if (file.size > 5 * 1024 * 1024) {
+        statusEl.textContent += `\nSkipped ${file.name} (over 5MB)`;
+        continue;
+      }
 
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
+      const formData = new FormData();
+      formData.append("image", file);
 
-    // Initialize animations
-    document.querySelectorAll('.fade-in').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
+      uploadPromises.push(
+        fetch(`https://api.imgbb.com/1/upload?key=${46b1df1b1d0dc220a768b4f16148d20c}`, {
+          method: "POST",
+          body: formData
+        }).then(response => response.json())
+      );
+    }
+
+    // Wait for all uploads to complete
+    const results = await Promise.all(uploadPromises);
+    
+    // Prepare data for manual addition to Google Sheet
+    let sheetData = "Here are your upload links. Please add them to the Google Sheet:\n\n";
+    results.forEach(result => {
+      if (result.success) {
+        sheetData += `URL: ${result.data.url}\nName: ${name}\nDescription: ${description}\n\n`;
+      }
     });
+
+    statusEl.innerHTML = `
+      <strong>Upload complete!</strong><br>
+      <textarea rows="5" style="width:100%; margin-top:10px;">${sheetData}</textarea>
+      <p>Admin: Copy this data to <a href="https://docs.google.com/spreadsheets/d/1Z2ezaO8cggN4lShMg5cNzhP9ARkCF9eiPxVoyeRwaI0/edit?usp=sharing" target="_blank">Google Sheet</a></p>
+    `;
+    
+    progressBar.style.width = "100%";
+    form.reset();
+    loadApprovedPhotos(); // Refresh gallery
+    
+  } catch (error) {
+    statusEl.textContent = `Error: ${error.message}`;
+    console.error("Upload failed:", error);
+  }
+});
+
+// Load Approved Photos from Google Sheets
+async function loadApprovedPhotos() {
+  try {
+    const response = await fetch(https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3MG1TSn-apnH2ZMaeBrtVMcj1g4C-_5auDod6UMcHOpoAk6XdnTAqePCJv2UujNSPNRdHdpiQCd9R/pub?output=csv
+
+);
+    const csvData = await response.text();
+    const rows = csvData.split('\n').slice(1); // Skip header row
+
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+
+    rows.forEach(row => {
+      const [url, name, description, approved] = row.split(',');
+      if (approved && approved.trim().toUpperCase() === 'TRUE' && url) {
+        gallery.innerHTML += `
+          <div class="photo-item">
+            <img src="${url.trim()}" alt="${description || 'Reunion photo'}">
+            <div class="photo-caption">
+              ${name ? `<strong>${name}</strong><br>` : ''}
+              ${description || ''}
+            </div>
+          </div>
+        `;
+      }
+    });
+  } catch (error) {
+    console.error("Error loading gallery:", error);
+    document.getElementById("gallery").innerHTML = `
+      <p style="grid-column:1/-1; color:red;">Error loading photos. Please try again later.</p>
+    `;
+  }
+}
+
+// Initialize
+window.addEventListener('load', () => {
+  loadApprovedPhotos();
+  
+  // Initialize animations
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, 100);
+  });
+});
   </script>
 </body>
 </html>
