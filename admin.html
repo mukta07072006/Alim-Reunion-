@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photo Approval</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .photo-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .photo-card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+    .photo-card img { width: 100%; height: 200px; object-fit: cover; }
+    .actions { display: flex; gap: 10px; margin-top: 10px; }
+    .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; }
+    .approve { background: #4CAF50; color: white; }
+    .reject { background: #f44336; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Photo Submissions</h1>
+  <div id="pending-photos" class="photo-container"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  
+  <script>
+    // Same Firebase config as before
+    const firebaseConfig = { /* your config */ };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function loadPendingPhotos() {
+      db.collection('photo_submissions')
+        .where('status', '==', 'pending')
+        .orderBy('uploadedAt', 'desc')
+        .get()
+        .then((querySnapshot) => {
+          const container = document.getElementById('pending-photos');
+          container.innerHTML = '';
+          
+          querySnapshot.forEach((doc) => {
+            const photo = doc.data();
+            const card = document.createElement('div');
+            card.className = 'photo-card';
+            card.innerHTML = `
+              <img src="${photo.downloadURL}" alt="${photo.description}">
+              <p><strong>${photo.name}</strong> (${photo.email})</p>
+              <p>${photo.description}</p>
+              <div class="actions">
+                <button class="btn approve" onclick="approvePhoto('${doc.id}')">Approve</button>
+                <button class="btn reject" onclick="rejectPhoto('${doc.id}')">Reject</button>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        });
+    }
+
+    function approvePhoto(docId) {
+      db.collection('photo_submissions').doc(docId).update({
+        status: 'approved',
+        approvedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => loadPendingPhotos());
+    }
+
+    function rejectPhoto(docId) {
+      db.collection('photo_submissions').doc(docId).update({
+        status: 'rejected'
+      }).then(() => loadPendingPhotos());
+    }
+
+    // Load pending photos on page load
+    window.addEventListener('load', loadPendingPhotos);
+  </script>
+</body>
+</html>
