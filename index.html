@@ -27,6 +27,15 @@
       line-height: 1.6;
     }
     
+     .hero-image {
+      width: 100%;
+      height: auto;
+      max-height: 50vh;
+      object-fit: cover;
+      display: block;
+      border-radius: 0 0 20px 20px;
+    }
+    
     header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
@@ -212,6 +221,57 @@
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
     }
+
+      .team-section {
+      text-align: center;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--box-shadow);
+    }
+
+    .team-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      margin: 0 auto 1.5rem;
+    }
+
+    .team-name {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .team-role {
+      color: var(--accent-light);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .team-bio {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+   
     
     footer {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -289,6 +349,10 @@
 </head>
 <body>
   <header>
+        <img src="20250601_033118.jpg" alt="Reunion Banner" class="hero-image">
+    <div class="header-content fade-in">
+    </div>
+
     <div class="header-content">
       <h1>Jamea Ahmadia Reunion Memories</h1>
       <p class="subtitle">Relive the unforgettable moments from our special gathering</p>
@@ -341,10 +405,29 @@
   
   <section class="upload-info">
     <h2>Share Your Memories</h2>
-    <p>After the event, you'll be able to upload your own photos and videos from the reunion to contribute to our collective memory book. We'll notify all participants when the upload feature becomes available.</p>
-    <a href="#" class="btn">Notify Me When Live</a>
+    <p>After the event, you'll be able to upload your own photos and videos from the reunion to contribute to our collective memory book.</p>
+    <a href="#" class="btn">Upload Your Photos</a>
+    
   </section>
-  
+   <section id="team" class="team-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Develoaper</h2>
+        
+        <!-- Developer Profile -->
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="hasnain.jpg" alt="Moshud Muktadir Al Hasnain" class="team-photo">
+            <h3 class="team-name">Moshud Muktadir Al Hasnain</h3>
+            <p class="team-role">Developer</p>
+            <p class="team-bio">Proud alumnus who built this platform to reconnect our batch. Passionate about using technology to bring people together.</p>
+            <div class="social-links">
+              <a href="https://github.com/mukta07072006" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.facebook.com/share/1QSjomNTRu/" target="_blank"><i class="fab fa-facebook"></i></a>
+              <a href="mailto:cr8v.muktadir@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        
   <footer>
     <div class="footer-content">
       <div class="social-links">
