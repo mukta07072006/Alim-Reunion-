@@ -1060,8 +1060,8 @@ form.addEventListener("submit", async (e) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      if (file.size > 5 * 1024 * 1024) {
-        statusEl.textContent += `\nSkipped ${file.name} (over 5MB)`;
+      if (file.size > 15 * 1024 * 1024) {
+        statusEl.textContent += `\nSkipped ${file.name} (over 15MB)`;
         continue;
       }
       if (!file.type.match('image.*')) {
