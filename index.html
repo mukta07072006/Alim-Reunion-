@@ -777,7 +777,7 @@
             <textarea id="photo-description" placeholder="Describe the moment or people in the photo"></textarea>
           </div>
           <div class="form-group">
-            <label for="photo-upload">Select Photos (Max 5MB each)</label>
+            <label for="photo-upload">Select Photos (Max 15MB each)</label>
             <input type="file" id="photo-upload" multiple accept="image/*">
             <div class="progress-container" id="progress-container">
               <div class="progress-bar" id="progress-bar"></div>
@@ -1043,8 +1043,8 @@ form.addEventListener("submit", async (e) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      if (file.size > 5 * 1024 * 1024) {
-        statusEl.textContent += `\nSkipped ${file.name} (over 5MB)`;
+      if (file.size > 15 * 1024 * 1024) {
+        statusEl.textContent += `\nSkipped ${file.name} (over 15MB)`;
         continue;
       }
       if (!file.type.match('image.*')) {
