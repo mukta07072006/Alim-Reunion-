@@ -1043,6 +1043,13 @@ form.addEventListener("submit", async (e) => {
       const result = await uploadToGlitchBackend(file, name, description);
       uploadResults.push(result);
     }
+     if (!uploadData[userFingerprint]) {
+  uploadData[userFingerprint] = {
+    uploadCount: 0,
+    lastUpload: null,
+    photos: []
+  };
+}
 
     uploadData[userFingerprint].uploadCount += uploadResults.length;
     uploadData[userFingerprint].lastUpload = new Date().toISOString();
