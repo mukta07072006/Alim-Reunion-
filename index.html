@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@2.1.4/dist/fingerprint2.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jamea Ahmadia Reunion - Memories Album</title>
@@ -820,9 +821,10 @@
   </footer>
 
   <script>
-// Configuration
 const PUBLISHED_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3MG1TSn-apnH2ZMaeBrtVMcj1g4C-_5auDod6UMcHOpoAk6XdnTAqePCJv2UujNSPNRdHdpiQCd9R/pub?output=csv";
 const IMGBB_API_KEY = "46b1df1b1d0dc220a768b4f16148d20c";
+const MAX_LIFETIME_UPLOADS = 2;
+const STORAGE_KEY = 'userUploadData';
 
 // DOM Elements
 const modal = document.getElementById("upload-modal");
@@ -834,9 +836,61 @@ const progressContainer = document.getElementById("progress-container");
 const statusEl = document.getElementById("upload-status");
 const fileInput = document.getElementById("photo-upload");
 const submitBtn = form.querySelector('button[type="submit"]');
+const uploadsRemainingEl = document.createElement('div');
+uploadsRemainingEl.id = 'uploads-remaining';
+uploadsRemainingEl.style.margin = '10px 0';
+document.querySelector('.upload-info').insertBefore(uploadsRemainingEl, uploadBtn);
+
+// User Tracking System
+let userFingerprint;
+let uploadData = {};
+
+async function initUserTracking() {
+  // Generate browser fingerprint
+  userFingerprint = await new Promise(resolve => {
+    Fingerprint2.get(components => {
+      const values = components.map(component => component.value);
+      resolve(Fingerprint2.x64hash128(values.join(''), 31));
+    });
+  });
+
+  // Load or initialize upload data
+  uploadData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  
+  if (!uploadData[userFingerprint]) {
+    uploadData[userFingerprint] = {
+      uploadCount: 0,
+      lastUpload: null
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(uploadData));
+  }
+
+  updateUploadUI();
+}
+
+function updateUploadUI() {
+  const remaining = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
+  uploadsRemainingEl.innerHTML = `
+    <p style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+      <strong>Uploads remaining:</strong> ${remaining}/${MAX_LIFETIME_UPLOADS}
+      ${remaining <= 0 ? '<br><span style="color:red;">(Lifetime limit reached)</span>' : ''}
+    </p>
+  `;
+  
+  uploadBtn.disabled = remaining <= 0;
+  if (remaining <= 0) {
+    uploadBtn.textContent = "Upload Limit Reached";
+    uploadBtn.style.opacity = "0.7";
+    uploadBtn.style.cursor = "not-allowed";
+  }
+}
 
 // Modal Controls
 function openModal() {
+  if (uploadData[userFingerprint].uploadCount >= MAX_LIFETIME_UPLOADS) {
+    alert("You've reached your lifetime upload limit of 2 photos");
+    return;
+  }
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
 }
@@ -858,9 +912,18 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// File Input Preview
+// File Input Handler
 fileInput.addEventListener("change", () => {
   const files = fileInput.files;
+  const remainingSlots = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
+  
+  if (files.length > remainingSlots) {
+    alert(`You can only upload ${remainingSlots} more photos (lifetime limit: ${MAX_LIFETIME_UPLOADS})`);
+    fileInput.value = '';
+    statusEl.textContent = `Please select up to ${remainingSlots} photos`;
+    return;
+  }
+  
   if (files.length > 0) {
     statusEl.textContent = `Selected ${files.length} file(s)`;
   }
@@ -922,6 +985,7 @@ form.addEventListener("submit", async (e) => {
   const name = document.getElementById("uploader-name").value.trim();
   const description = document.getElementById("photo-description").value.trim();
   const files = fileInput.files;
+  const remainingSlots = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
 
   // Validate inputs
   if (!name) {
@@ -931,6 +995,11 @@ form.addEventListener("submit", async (e) => {
 
   if (files.length === 0) {
     statusEl.textContent = "Please select at least one photo";
+    return;
+  }
+
+  if (files.length > remainingSlots) {
+    alert(`You can only upload ${remainingSlots} more photos (lifetime limit: ${MAX_LIFETIME_UPLOADS})`);
     return;
   }
 
@@ -984,11 +1053,17 @@ form.addEventListener("submit", async (e) => {
       });
     }
 
+    // Update upload count
+    uploadData[userFingerprint].uploadCount += uploadResults.length;
+    uploadData[userFingerprint].lastUpload = new Date().toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(uploadData));
+    
     // Complete upload
     progressBar.style.width = "100%";
     statusEl.innerHTML = `
       <strong>${uploadResults.length} photos uploaded successfully!</strong>
       <p>Thank you for sharing your memories, ${name}!</p>
+      <p>You have ${MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount} uploads remaining.</p>
       <button onclick="closeModal()" class="btn">Close</button>
     `;
     
@@ -998,6 +1073,7 @@ form.addEventListener("submit", async (e) => {
     ).join("\n\n");
     
     console.log("Uploaded photos data:", sheetData);
+    updateUploadUI();
     loadApprovedPhotos(); // Refresh gallery
     
   } catch (error) {
@@ -1012,7 +1088,8 @@ form.addEventListener("submit", async (e) => {
 });
 
 // Initialize page
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+  await initUserTracking();
   loadApprovedPhotos();
   
   // Animation initialization
