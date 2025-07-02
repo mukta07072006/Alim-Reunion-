@@ -842,6 +842,7 @@ const gallery = document.getElementById("gallery");
 // === USER TRACKING ===
 let userFingerprint;
 let uploadData = {};
+let userTrackingReady = false;
 
 async function initUserTracking() {
   userFingerprint = await new Promise(resolve => {
@@ -871,13 +872,15 @@ async function initUserTracking() {
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(uploadData));
   }
+  
+  userTrackingReady = true;
 
   updateUploadUI();
   displayUserPhotos();
 }
 
 function updateUploadUI() {
-  const remaining = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
+  const remaining = MAX_LIFETIME_UPLOADS - (uploadData[userFingerprint]?.uploadCount || 0);
   const uploadsRemainingEl = document.getElementById('uploads-remaining') || createUploadsRemainingEl();
 
   uploadsRemainingEl.innerHTML = `
@@ -911,9 +914,11 @@ function displayUserPhotos() {
   gallery.innerHTML = '';
   samplePhotos.forEach(photo => gallery.appendChild(photo));
 
-  uploadData[userFingerprint].photos.forEach(photo => {
-    addPhotoToGallery(photo.url, photo.name, photo.description);
-  });
+  if (uploadData[userFingerprint]?.photos) {
+    uploadData[userFingerprint].photos.forEach(photo => {
+      addPhotoToGallery(photo.url, photo.name, photo.description);
+    });
+  }
 }
 
 function addPhotoToGallery(url, name, description) {
@@ -955,7 +960,13 @@ async function uploadToGlitchBackend(file, name, description) {
 
 // === MODAL CONTROL ===
 function openModal() {
-  if (uploadData[userFingerprint].uploadCount >= MAX_LIFETIME_UPLOADS) {
+  if (!userTrackingReady) {
+    alert("Please wait while user identification completes.");
+    return;
+  }
+  
+  const currentCount = uploadData[userFingerprint]?.uploadCount || 0;
+  if (currentCount >= MAX_LIFETIME_UPLOADS) {
     alert("You've reached your lifetime upload limit of 2 photos");
     return;
   }
@@ -980,7 +991,7 @@ window.addEventListener("click", (e) => {
 // === FILE INPUT ===
 fileInput.addEventListener("change", () => {
   const files = fileInput.files;
-  const remainingSlots = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
+  const remainingSlots = MAX_LIFETIME_UPLOADS - (uploadData[userFingerprint]?.uploadCount || 0);
 
   if (files.length > remainingSlots) {
     alert(`You can only upload ${remainingSlots} more photos`);
@@ -998,10 +1009,15 @@ fileInput.addEventListener("change", () => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  if (!userTrackingReady) {
+    statusEl.textContent = "Please wait until user identification completes.";
+    return;
+  }
+  
   const name = document.getElementById("uploader-name").value.trim();
   const description = document.getElementById("photo-description").value.trim();
   const files = fileInput.files;
-  const remainingSlots = MAX_LIFETIME_UPLOADS - uploadData[userFingerprint].uploadCount;
+  const remainingSlots = MAX_LIFETIME_UPLOADS - (uploadData[userFingerprint]?.uploadCount || 0);
 
   if (!name) {
     statusEl.textContent = "Please enter your name";
@@ -1043,13 +1059,15 @@ form.addEventListener("submit", async (e) => {
       const result = await uploadToGlitchBackend(file, name, description);
       uploadResults.push(result);
     }
-     if (!uploadData[userFingerprint]) {
-  uploadData[userFingerprint] = {
-    uploadCount: 0,
-    lastUpload: null,
-    photos: []
-  };
-}
+
+    // Ensure user data exists before updating
+    if (!uploadData[userFingerprint]) {
+      uploadData[userFingerprint] = {
+        uploadCount: 0,
+        lastUpload: null,
+        photos: []
+      };
+    }
 
     uploadData[userFingerprint].uploadCount += uploadResults.length;
     uploadData[userFingerprint].lastUpload = new Date().toISOString();
