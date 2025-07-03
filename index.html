@@ -799,24 +799,12 @@
     let uploadData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { uploadCount: 0 };
 
     // Load global photos from backend and append them dynamically after your static photos
- // Load global photos from backend (with description)
-async function loadPhotos() {
-  try {
-    const res = await fetch("https://special-wandering-bathtub.glitch.me/photos");
-    const photos = await res.json();
-    gallery.innerHTML = '';
-    photos.forEach(photo => {
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <img src="${photo.url}" alt="${photo.description || ''}">
-        <p><strong>${photo.name}</strong>: ${photo.description}</p>
-      `;
-      gallery.appendChild(div);
-    });
-  } catch (err) {
-    console.error("Failed to load gallery:", err);
-  }
-}
+    async function loadPhotos() {
+      try {
+        const res = await fetch("https://special-wandering-bathtub.glitch.me/photos");
+        if (!res.ok) throw new Error("Failed to fetch photos");
+        const photos = await res.json();
+
 
 
         // Remove previously added dynamic photos only
